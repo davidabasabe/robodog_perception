@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from robot_interfaces/msg/YoloDetection.msg
+// generated code does not contain a copyright notice
+
+
+module robot_interfaces {
+  module msg {
+    struct YoloDetection {
+      string class_name;
+
+      double distance;
+
+      uint64 x;
+
+      uint64 y;
+
+      uint64 w;
+
+      uint64 h;
+    };
+  };
+};
