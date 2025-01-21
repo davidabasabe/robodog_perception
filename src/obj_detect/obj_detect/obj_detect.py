@@ -1,4 +1,5 @@
 import rclpy
+import numpy as np
 from cv_bridge import CvBridge
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -8,10 +9,13 @@ from ultralytics import YOLO
 class ImageProcessor(Node):
     def __init__(self):
         super().__init__('image_processor')
-        self.subscriber_ = self.create_subscription(Image, '/go2/Image', self.listener_callback, 10)
-        self.publisher_ = self.create_publisher(Image, '/TeamB/go2/Image/Prediction', 10)
+        self.subscriber_ = self.create_subscription(Image, '/rs/Image/Color', self.listener_callback, 10)
+        self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
+        self.publisher_ = self.create_publisher(Image, '/TeamB/rs/Image/Prediction', 10)
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
+
+        self.depth_array = None
 
         self.label_lookup = {
             0: "arrow_left",
@@ -37,12 +41,24 @@ class ImageProcessor(Node):
         #print(result_prob)
         self.publisher_.publish(self.cvbridge.cv2_to_imgmsg(result.plot()))
 
+        def get_midpoint(coord_list):
+            x = (coord_list[0] + coord_list[2])/2
+            y = (coord_list[1] + coord_list[3])/2
+            return [x, y]
+
         boxes = [{
             "label": self.label_lookup[int(box.cls.item())],
             "conf": box.conf.item(),
-            "box": box.xyxy.tolist()[0]
+            "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
+
+        
+
         print(boxes)
+
+    def depth_callback(self, msg):
+        depth_image = self.cvbridge.imgmsg_to_cv2(msg, desired_encoding='16UC1')
+        self.depth_array = np.array(depth_image, dtype=np.uint16)
 
 
 
