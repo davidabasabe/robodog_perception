@@ -7,6 +7,7 @@ import sensor_msgs_py.point_cloud2 as pc2
 from sensor_msgs.msg import PointCloud2
 from collections import defaultdict
 from numpy.lib import recfunctions as rfn
+from std_msgs.msg import String
 
 import matplotlib.pyplot as plt
 import random
@@ -17,6 +18,7 @@ class StepDetection(Node):
     def __init__(self):
         super().__init__('step_detection')
         self.subscriber_ = self.create_subscription(PointCloud2, '/go2/Lidar', self.listener_callback, 10)
+        #self.publisher_ = self.create_publisher(String, '/topic', 10)
         self.current_lidar_points = []
         self.moving_average_height_diff = deque()
         self.moving_average_ground_height = deque()
@@ -137,13 +139,13 @@ class StepDetection(Node):
         smoothened_height_diff = (sum(self.moving_average_height_diff) + height_diff) / (len(self.moving_average_height_diff) + 1)
         self.add_height_to_storage(smoothened_height_diff, self.moving_average_height_diff)
         if 0.2 > smoothened_height_diff > 0.02:
-            print("step up!")
+            self.get_logger().info("step up!")
             pass
         elif -1 < smoothened_height_diff < -0.01:
-            print("step down!")
+            self.get_logger().info("step down!")
             pass
         else:
-            print("no step!")
+            self.get_logger().info("no step!")
             pass
 
     def add_height_to_storage(self, height_diff: float, storage: deque) -> list[float]:
