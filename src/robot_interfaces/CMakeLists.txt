@@ -32,6 +32,12 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Intrinsics.msg"
   "msg/YoloDetection.msg"
+  "msg/Stair.msg"
+  "msg/Wall.msg"
+  "msg/Robot.msg"
+  "srv/Perception.srv"
+  "action/Commands.action"
+  "action/Fibonacci.action"
   DEPENDENCIES geometry_msgs # Add packages that above messages depend on, e.g. geometry_msgs
 )
 
