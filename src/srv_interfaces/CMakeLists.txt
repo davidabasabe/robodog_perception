@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(robot_interfaces)
+project(srv_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,9 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/AddTwoInts.srv"
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -22,23 +27,5 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-##############################################################################################
-# Has to be added for custom messages to convert them into language-specific code like Python
-##############################################################################################
-find_package(geometry_msgs REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Intrinsics.msg"
-  "msg/YoloDetection.msg"
-  "msg/Stair.msg"
-  "msg/Wall.msg"
-  "msg/Robot.msg"
-  "srv/Perception.srv"
-  "action/Commands.action"
-  "action/Fibonacci.action"
-  DEPENDENCIES geometry_msgs # Add packages that above messages depend on, e.g. geometry_msgs
-)
 
 ament_package()

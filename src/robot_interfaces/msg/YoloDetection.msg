@@ -1,6 +1,6 @@
 string class_name
+bool detected
 float64 distance
-uint64 x
-uint64 y
-uint64 w
-uint64 h
+float64 x
+float64 y
+float64 z
