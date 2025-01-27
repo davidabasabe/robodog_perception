@@ -51,7 +51,7 @@ class ImageProcessor(Node):
             path = boxes[labels.index("path")]
             path_img_x, path_img_y = path["coord"]
             path_coods = self.pixel_to_point(int(path_img_x), int(path_img_y))
-            print(f"x: {path_img_x}  y: {path_img_y}  d: {self.depth_array[path_img_y, path_img_x]*self.depth_scale}  | ", path_coods)
+            print(f"x: {path_img_x}  y: {path_img_y}  d: {self.depth_array[int(path_img_y), int(path_img_x)]*self.depth_scale}  | ", path_coods)
         
 
     def depth_callback(self, msg):
