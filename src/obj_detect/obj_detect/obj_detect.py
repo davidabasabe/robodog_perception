@@ -4,6 +4,8 @@ from cv_bridge import CvBridge
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from ultralytics import YOLO
+import pyrealsense2 as rs
+from robot_interfaces.msg import Intrinsics
 
 
 class ImageProcessor(Node):
@@ -11,10 +13,12 @@ class ImageProcessor(Node):
         super().__init__('image_processor')
         self.subscriber_ = self.create_subscription(Image, '/rs/Image/Color', self.listener_callback, 10)
         self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
+        self.subscriber_rs_intrinsics = self.create_subscription(Intrinsics, '/rs/Intrinsics', self.rs_intrinsics_callback, 1)
         self.publisher_ = self.create_publisher(Image, '/TeamB/rs/Image/Prediction', 10)
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
-
+        self.depth_intrinsics = rs.pyrealsense2.intrinsics()
+        self.deth_scale = None
         self.depth_array = None
 
         self.label_lookup = {
@@ -29,16 +33,6 @@ class ImageProcessor(Node):
         image = self.cvbridge.imgmsg_to_cv2(img_msg=msg, desired_encoding="bgr8")
         result = self.yolo_model.predict(image)[0].cpu()
 
-        result_prob = [box.conf.item() for box in result.boxes]
-        #print("Probabilities:", result_prob)
-
-        result_coords = [box.xyxy for box in result.boxes]
-        #print("Bounding Box Coordinates:", result_coords)
-
-        result_labels = [box.cls.item() for box in result.boxes]
-        #print("Class Indices (Labels):", result_labels)
-
-        #print(result_prob)
         self.publisher_.publish(self.cvbridge.cv2_to_imgmsg(result.plot()))
 
         def get_midpoint(coord_list):
@@ -52,15 +46,39 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
-        
-
         print(boxes)
+
+        labels = [e["label"] for e in boxes]
+        if "path" in labels:
+            path = boxes[labels.index("path")]
+            path_img_x, path_img_y = path["coord"]
+            path_coods = self.pixel_to_point(int(path_img_x), int(path_img_y))
+            print(path_coods)
+        
 
     def depth_callback(self, msg):
         depth_image = self.cvbridge.imgmsg_to_cv2(msg, desired_encoding='16UC1')
         self.depth_array = np.array(depth_image, dtype=np.uint16)
 
+    def rs_intrinsics_callback(self, msg):
+        self.depth_intrinsics.width = msg.width
+        self.depth_intrinsics.height = msg.height
+        self.depth_intrinsics.ppx = msg.ppx
+        self.depth_intrinsics.ppy = msg.ppy
+        self.depth_intrinsics.fx = msg.fx
+        self.depth_intrinsics.fy = msg.fy
+        self.depth_scale = msg.depth_scale
+        if msg.model == "rs.pyrealsense2.distortion.inverse_brown_conrady":
+            self.depth_intrinsics.model = rs.pyrealsense2.distortion.inverse_brown_conrady
+        self.depth_intrinsics.coeffs = msg.coeffs
 
+    def pixel_to_point(self, x, y):
+        coordinate = rs.rs2_deproject_pixel_to_point(
+            self.depth_intrinsics,
+            [y, x],
+            self.depth_array[y, x]*self.depth_scale
+            )
+        return coordinate
 
 def main(args=None):
     rclpy.init(args=args)

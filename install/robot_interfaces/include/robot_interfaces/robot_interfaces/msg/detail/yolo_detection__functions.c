@@ -26,11 +26,11 @@ robot_interfaces__msg__YoloDetection__init(robot_interfaces__msg__YoloDetection 
     robot_interfaces__msg__YoloDetection__fini(msg);
     return false;
   }
+  // detected
   // distance
   // x
   // y
-  // w
-  // h
+  // z
   return true;
 }
 
@@ -42,11 +42,11 @@ robot_interfaces__msg__YoloDetection__fini(robot_interfaces__msg__YoloDetection 
   }
   // class_name
   rosidl_runtime_c__String__fini(&msg->class_name);
+  // detected
   // distance
   // x
   // y
-  // w
-  // h
+  // z
 }
 
 bool
@@ -61,6 +61,10 @@ robot_interfaces__msg__YoloDetection__are_equal(const robot_interfaces__msg__Yol
   {
     return false;
   }
+  // detected
+  if (lhs->detected != rhs->detected) {
+    return false;
+  }
   // distance
   if (lhs->distance != rhs->distance) {
     return false;
@@ -73,12 +77,8 @@ robot_interfaces__msg__YoloDetection__are_equal(const robot_interfaces__msg__Yol
   if (lhs->y != rhs->y) {
     return false;
   }
-  // w
-  if (lhs->w != rhs->w) {
-    return false;
-  }
-  // h
-  if (lhs->h != rhs->h) {
+  // z
+  if (lhs->z != rhs->z) {
     return false;
   }
   return true;
@@ -98,16 +98,16 @@ robot_interfaces__msg__YoloDetection__copy(
   {
     return false;
   }
+  // detected
+  output->detected = input->detected;
   // distance
   output->distance = input->distance;
   // x
   output->x = input->x;
   // y
   output->y = input->y;
-  // w
-  output->w = input->w;
-  // h
-  output->h = input->h;
+  // z
+  output->z = input->z;
   return true;
 }
 
