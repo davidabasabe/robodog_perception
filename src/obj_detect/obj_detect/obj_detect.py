@@ -31,7 +31,7 @@ class ImageProcessor(Node):
 
     def listener_callback(self, msg):
         image = self.cvbridge.imgmsg_to_cv2(img_msg=msg, desired_encoding="bgr8")
-        result = self.yolo_model.predict(image)[0].cpu()
+        result = self.yolo_model.predict(image, verbose=False)[0].cpu()
 
         self.publisher_.publish(self.cvbridge.cv2_to_imgmsg(result.plot()))
 
@@ -45,8 +45,6 @@ class ImageProcessor(Node):
             "conf": box.conf.item(),
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
-
-        print(boxes)
 
         labels = [e["label"] for e in boxes]
         if "path" in labels:
