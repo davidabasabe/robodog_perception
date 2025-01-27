@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from robot_interfaces/srv/Perception.srv
+// generated code does not contain a copyright notice
+
+#include "robot_interfaces/msg/Robot.idl"
+
+module robot_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "Request (empty, since we don't send data with the request)")
+    struct Perception_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    @verbatim (language="comment", text=
+      "Response")
+    struct Perception_Response {
+      robot_interfaces::msg::Robot robot;
+    };
+  };
+};

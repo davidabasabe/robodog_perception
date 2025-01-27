@@ -8,15 +8,15 @@ module robot_interfaces {
     struct YoloDetection {
       string class_name;
 
+      boolean detected;
+
       double distance;
 
-      uint64 x;
+      double x;
 
-      uint64 y;
+      double y;
 
-      uint64 w;
-
-      uint64 h;
+      double z;
     };
   };
 };
