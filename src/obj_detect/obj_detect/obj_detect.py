@@ -18,7 +18,7 @@ class ImageProcessor(Node):
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
         self.depth_intrinsics = rs.pyrealsense2.intrinsics()
-        self.deth_scale = None
+        self.depth_scale = 0
         self.depth_array = None
 
         self.label_lookup = {
@@ -51,7 +51,7 @@ class ImageProcessor(Node):
             path = boxes[labels.index("path")]
             path_img_x, path_img_y = path["coord"]
             path_coods = self.pixel_to_point(int(path_img_x), int(path_img_y))
-            print(f"x: {path_img_x}  y: {path_img_y}  d: {self.depth_array[int(path_img_y), int(path_img_x)]*self.depth_scale}  | ", path_coods)
+            print(f"x: {int(path_img_x)}  y: {int(path_img_y)}  d: {self.depth_array[int(path_img_y), int(path_img_x)]*self.depth_scale:.2f}  | ", path_coods)
         
 
     def depth_callback(self, msg):
