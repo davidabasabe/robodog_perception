@@ -39,11 +39,11 @@ struct YoloDetection_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->class_name = "";
+      this->detected = false;
       this->distance = 0.0;
-      this->x = 0ull;
-      this->y = 0ull;
-      this->w = 0ull;
-      this->h = 0ull;
+      this->x = 0.0;
+      this->y = 0.0;
+      this->z = 0.0;
     }
   }
 
@@ -54,11 +54,11 @@ struct YoloDetection_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->class_name = "";
+      this->detected = false;
       this->distance = 0.0;
-      this->x = 0ull;
-      this->y = 0ull;
-      this->w = 0ull;
-      this->h = 0ull;
+      this->x = 0.0;
+      this->y = 0.0;
+      this->z = 0.0;
     }
   }
 
@@ -66,27 +66,33 @@ struct YoloDetection_
   using _class_name_type =
     std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
   _class_name_type class_name;
+  using _detected_type =
+    bool;
+  _detected_type detected;
   using _distance_type =
     double;
   _distance_type distance;
   using _x_type =
-    uint64_t;
+    double;
   _x_type x;
   using _y_type =
-    uint64_t;
+    double;
   _y_type y;
-  using _w_type =
-    uint64_t;
-  _w_type w;
-  using _h_type =
-    uint64_t;
-  _h_type h;
+  using _z_type =
+    double;
+  _z_type z;
 
   // setters for named parameter idiom
   Type & set__class_name(
     const std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> & _arg)
   {
     this->class_name = _arg;
+    return *this;
+  }
+  Type & set__detected(
+    const bool & _arg)
+  {
+    this->detected = _arg;
     return *this;
   }
   Type & set__distance(
@@ -96,27 +102,21 @@ struct YoloDetection_
     return *this;
   }
   Type & set__x(
-    const uint64_t & _arg)
+    const double & _arg)
   {
     this->x = _arg;
     return *this;
   }
   Type & set__y(
-    const uint64_t & _arg)
+    const double & _arg)
   {
     this->y = _arg;
     return *this;
   }
-  Type & set__w(
-    const uint64_t & _arg)
+  Type & set__z(
+    const double & _arg)
   {
-    this->w = _arg;
-    return *this;
-  }
-  Type & set__h(
-    const uint64_t & _arg)
-  {
-    this->h = _arg;
+    this->z = _arg;
     return *this;
   }
 
@@ -165,6 +165,9 @@ struct YoloDetection_
     if (this->class_name != other.class_name) {
       return false;
     }
+    if (this->detected != other.detected) {
+      return false;
+    }
     if (this->distance != other.distance) {
       return false;
     }
@@ -174,10 +177,7 @@ struct YoloDetection_
     if (this->y != other.y) {
       return false;
     }
-    if (this->w != other.w) {
-      return false;
-    }
-    if (this->h != other.h) {
+    if (this->z != other.z) {
       return false;
     }
     return true;

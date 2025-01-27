@@ -21,32 +21,16 @@ namespace msg
 namespace builder
 {
 
-class Init_YoloDetection_h
+class Init_YoloDetection_z
 {
 public:
-  explicit Init_YoloDetection_h(::robot_interfaces::msg::YoloDetection & msg)
+  explicit Init_YoloDetection_z(::robot_interfaces::msg::YoloDetection & msg)
   : msg_(msg)
   {}
-  ::robot_interfaces::msg::YoloDetection h(::robot_interfaces::msg::YoloDetection::_h_type arg)
+  ::robot_interfaces::msg::YoloDetection z(::robot_interfaces::msg::YoloDetection::_z_type arg)
   {
-    msg_.h = std::move(arg);
+    msg_.z = std::move(arg);
     return std::move(msg_);
-  }
-
-private:
-  ::robot_interfaces::msg::YoloDetection msg_;
-};
-
-class Init_YoloDetection_w
-{
-public:
-  explicit Init_YoloDetection_w(::robot_interfaces::msg::YoloDetection & msg)
-  : msg_(msg)
-  {}
-  Init_YoloDetection_h w(::robot_interfaces::msg::YoloDetection::_w_type arg)
-  {
-    msg_.w = std::move(arg);
-    return Init_YoloDetection_h(msg_);
   }
 
 private:
@@ -59,10 +43,10 @@ public:
   explicit Init_YoloDetection_y(::robot_interfaces::msg::YoloDetection & msg)
   : msg_(msg)
   {}
-  Init_YoloDetection_w y(::robot_interfaces::msg::YoloDetection::_y_type arg)
+  Init_YoloDetection_z y(::robot_interfaces::msg::YoloDetection::_y_type arg)
   {
     msg_.y = std::move(arg);
-    return Init_YoloDetection_w(msg_);
+    return Init_YoloDetection_z(msg_);
   }
 
 private:
@@ -101,16 +85,32 @@ private:
   ::robot_interfaces::msg::YoloDetection msg_;
 };
 
+class Init_YoloDetection_detected
+{
+public:
+  explicit Init_YoloDetection_detected(::robot_interfaces::msg::YoloDetection & msg)
+  : msg_(msg)
+  {}
+  Init_YoloDetection_distance detected(::robot_interfaces::msg::YoloDetection::_detected_type arg)
+  {
+    msg_.detected = std::move(arg);
+    return Init_YoloDetection_distance(msg_);
+  }
+
+private:
+  ::robot_interfaces::msg::YoloDetection msg_;
+};
+
 class Init_YoloDetection_class_name
 {
 public:
   Init_YoloDetection_class_name()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  Init_YoloDetection_distance class_name(::robot_interfaces::msg::YoloDetection::_class_name_type arg)
+  Init_YoloDetection_detected class_name(::robot_interfaces::msg::YoloDetection::_class_name_type arg)
   {
     msg_.class_name = std::move(arg);
-    return Init_YoloDetection_distance(msg_);
+    return Init_YoloDetection_detected(msg_);
   }
 
 private:

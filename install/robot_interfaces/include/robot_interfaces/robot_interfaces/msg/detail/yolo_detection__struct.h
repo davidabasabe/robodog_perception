@@ -25,11 +25,11 @@ extern "C"
 typedef struct robot_interfaces__msg__YoloDetection
 {
   rosidl_runtime_c__String class_name;
+  bool detected;
   double distance;
-  uint64_t x;
-  uint64_t y;
-  uint64_t w;
-  uint64_t h;
+  double x;
+  double y;
+  double z;
 } robot_interfaces__msg__YoloDetection;
 
 // Struct for a sequence of robot_interfaces__msg__YoloDetection.

@@ -54,6 +54,23 @@ static rosidl_typesupport_introspection_c__MessageMember robot_interfaces__msg__
     NULL  // resize(index) function pointer
   },
   {
+    "detected",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(robot_interfaces__msg__YoloDetection, detected),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
     "distance",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
     0,  // upper bound of string
@@ -72,7 +89,7 @@ static rosidl_typesupport_introspection_c__MessageMember robot_interfaces__msg__
   },
   {
     "x",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT64,  // type
+    rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     false,  // is array
@@ -89,7 +106,7 @@ static rosidl_typesupport_introspection_c__MessageMember robot_interfaces__msg__
   },
   {
     "y",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT64,  // type
+    rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     false,  // is array
@@ -105,31 +122,14 @@ static rosidl_typesupport_introspection_c__MessageMember robot_interfaces__msg__
     NULL  // resize(index) function pointer
   },
   {
-    "w",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT64,  // type
+    "z",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(robot_interfaces__msg__YoloDetection, w),  // bytes offset in struct
-    NULL,  // default value
-    NULL,  // size() function pointer
-    NULL,  // get_const(index) function pointer
-    NULL,  // get(index) function pointer
-    NULL,  // fetch(index, &value) function pointer
-    NULL,  // assign(index, value) function pointer
-    NULL  // resize(index) function pointer
-  },
-  {
-    "h",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT64,  // type
-    0,  // upper bound of string
-    NULL,  // members of sub message
-    false,  // is array
-    0,  // array size
-    false,  // is upper bound
-    offsetof(robot_interfaces__msg__YoloDetection, h),  // bytes offset in struct
+    offsetof(robot_interfaces__msg__YoloDetection, z),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer

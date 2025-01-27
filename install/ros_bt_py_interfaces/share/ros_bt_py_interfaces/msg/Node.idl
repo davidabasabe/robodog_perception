@@ -1,0 +1,91 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from ros_bt_py_interfaces/msg/Node.msg
+// generated code does not contain a copyright notice
+
+#include "ros_bt_py_interfaces/msg/NodeData.idl"
+
+module ros_bt_py_interfaces {
+  module msg {
+    module Node_Constants {
+      const string UNINITIALIZED = "UNINITIALIZED";
+      const string IDLE = "IDLE";
+      const string UNASSIGNED = "UNASSIGNED";
+      const string ASSIGNED = "ASSIGNED";
+      const string RUNNING = "RUNNING";
+      const string SUCCEEDED = "SUCCEEDED";
+      const string SUCCEED = "SUCCEEDED";
+      const string SUCCESS = "SUCCEEDED";
+      const string FAILED = "FAILED";
+      const string FAIL = "FAILED";
+      const string FAILURE = "FAILED";
+      const string BROKEN = "BROKEN";
+      const string PAUSED = "PAUSED";
+      const string SHUTDOWN = "SHUTDOWN";
+    };
+    @verbatim (language="comment", text=
+      "Copyright 2023 FZI Forschungszentrum Informatik" "\n"
+      "" "\n"
+      "Redistribution and use in source and binary forms, with or without" "\n"
+      "modification, are permitted provided that the following conditions are met:" "\n"
+      "" "\n"
+      "   * Redistributions of source code must retain the above copyright" "\n"
+      "     notice, this list of conditions and the following disclaimer." "\n"
+      "" "\n"
+      "   * Redistributions in binary form must reproduce the above copyright" "\n"
+      "     notice, this list of conditions and the following disclaimer in the" "\n"
+      "     documentation and/or other materials provided with the distribution." "\n"
+      "" "\n"
+      "   * Neither the name of the FZI Forschungszentrum Informatik nor the names of its" "\n"
+      "     contributors may be used to endorse or promote products derived from" "\n"
+      "     this software without specific prior written permission." "\n"
+      "" "\n"
+      "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"" "\n"
+      "AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE" "\n"
+      "IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE" "\n"
+      "ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE" "\n"
+      "LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR" "\n"
+      "CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF" "\n"
+      "SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS" "\n"
+      "INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN" "\n"
+      "CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)" "\n"
+      "ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE" "\n"
+      "POSSIBILITY OF SUCH DAMAGE." "\n"
+      "The python module the node is from")
+    struct Node {
+      string module;
+
+      @verbatim (language="comment", text=
+        "The python class name of the node")
+      string node_class;
+
+      @verbatim (language="comment", text=
+        "The version of this node")
+      string version;
+
+      @verbatim (language="comment", text=
+        "The maximum amount of children this node supports, where -1 means" "\n"
+        "infinite children")
+      int32 max_children;
+
+      @verbatim (language="comment", text=
+        "These are run-time parameters" "\n"
+        "Each node name must be unique in its tree. This does not count for" "\n"
+        "subtrees, as they're handled separately.")
+      string name;
+
+      @verbatim (language="comment", text=
+        "Order is important for child_names!")
+      sequence<string> child_names;
+
+      sequence<ros_bt_py_interfaces::msg::NodeData> options;
+
+      sequence<ros_bt_py_interfaces::msg::NodeData> inputs;
+
+      sequence<ros_bt_py_interfaces::msg::NodeData> outputs;
+
+      @verbatim (language="comment", text=
+        "Should be one of the constants below")
+      string state;
+    };
+  };
+};

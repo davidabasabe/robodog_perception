@@ -1,0 +1,27 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from robot_interfaces/action/Commands.action
+// generated code does not contain a copyright notice
+
+#include "robot_interfaces/msg/Robot.idl"
+
+module robot_interfaces {
+  module action {
+    @verbatim (language="comment", text=
+      "Request")
+    struct Commands_Goal {
+      string sequence;
+
+      robot_interfaces::msg::Robot robot;
+    };
+    @verbatim (language="comment", text=
+      "Result")
+    struct Commands_Result {
+      boolean finished;
+    };
+    @verbatim (language="comment", text=
+      "Feedback")
+    struct Commands_Feedback {
+      string status;
+    };
+  };
+};
