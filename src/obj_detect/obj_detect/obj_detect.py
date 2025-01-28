@@ -50,7 +50,7 @@ class ImageProcessor(Node):
 
         def get_coords(box):
             img_x, img_y = box["coord"]
-            distance = self.depth_array[img_y, img_x]*self.depth_scale
+            distance = self.depth_array[int(img_x), int(img_y)]*self.depth_scale
             coords = self.pixel_to_point(int(img_x), int(img_y))
             return coords, distance
         
