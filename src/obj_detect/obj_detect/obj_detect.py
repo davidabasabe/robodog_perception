@@ -60,7 +60,7 @@ class ImageProcessor(Node):
         lava_msg.class_name = "lava"
         if "path" in classes:
             box = boxes[classes.index("path")]
-            coords, dist = get_coords(box["coord"])
+            coords, dist = get_coords(box)
             lava_msg.x, lava_msg.y, lava_msg.z = coords
             lava_msg.distance = dist
             lava_msg.detected = True
@@ -71,7 +71,7 @@ class ImageProcessor(Node):
         al_msg.class_name = "arrow_left"
         if "arrow_left" in classes:
             box = boxes[classes.index("arrow_left")]
-            coords, dist = get_coords(box["coord"])
+            coords, dist = get_coords(box)
             al_msg.x, al_msg.y, al_msg.z = coords
             al_msg.distance = dist
             al_msg.detected = True
@@ -82,7 +82,7 @@ class ImageProcessor(Node):
         ar_msg.class_name = "arrow_right"
         if "arrow_right" in classes:
             box = boxes[classes.index("arrow_right")]
-            coords, dist = get_coords(box["coord"])
+            coords, dist = get_coords(box)
             ar_msg.x, ar_msg.y, ar_msg.z = coords
             ar_msg.distance = dist
             ar_msg.detected = True
