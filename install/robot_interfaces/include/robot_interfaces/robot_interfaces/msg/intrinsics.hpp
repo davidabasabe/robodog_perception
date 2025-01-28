@@ -7,5 +7,6 @@
 #include "robot_interfaces/msg/detail/intrinsics__struct.hpp"
 #include "robot_interfaces/msg/detail/intrinsics__builder.hpp"
 #include "robot_interfaces/msg/detail/intrinsics__traits.hpp"
+#include "robot_interfaces/msg/detail/intrinsics__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__MSG__INTRINSICS_HPP_

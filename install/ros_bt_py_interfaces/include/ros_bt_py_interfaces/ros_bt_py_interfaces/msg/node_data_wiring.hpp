@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/msg/detail/node_data_wiring__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/node_data_wiring__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/node_data_wiring__traits.hpp"
+#include "ros_bt_py_interfaces/msg/detail/node_data_wiring__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__NODE_DATA_WIRING_HPP_

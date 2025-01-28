@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/prepare_local_implementation__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/prepare_local_implementation__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/prepare_local_implementation__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/prepare_local_implementation__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__PREPARE_LOCAL_IMPLEMENTATION_HPP_

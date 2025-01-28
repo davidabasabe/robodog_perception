@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/find_best_capability_executor__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/find_best_capability_executor__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/find_best_capability_executor__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/find_best_capability_executor__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__FIND_BEST_CAPABILITY_EXECUTOR_HPP_

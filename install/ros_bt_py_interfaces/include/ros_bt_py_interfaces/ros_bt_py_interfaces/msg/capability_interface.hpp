@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/msg/detail/capability_interface__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_interface__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_interface__traits.hpp"
+#include "ros_bt_py_interfaces/msg/detail/capability_interface__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__CAPABILITY_INTERFACE_HPP_

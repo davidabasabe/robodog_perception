@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/save_capabilities__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/save_capabilities__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/save_capabilities__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/save_capabilities__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__SAVE_CAPABILITIES_HPP_

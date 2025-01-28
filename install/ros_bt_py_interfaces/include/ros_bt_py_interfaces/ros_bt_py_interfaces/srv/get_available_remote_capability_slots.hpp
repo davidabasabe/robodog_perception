@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/get_available_remote_capability_slots__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_available_remote_capability_slots__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_available_remote_capability_slots__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/get_available_remote_capability_slots__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_AVAILABLE_REMOTE_CAPABILITY_SLOTS_HPP_

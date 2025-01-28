@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/check_precondition_status__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/check_precondition_status__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/check_precondition_status__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/check_precondition_status__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__CHECK_PRECONDITION_STATUS_HPP_

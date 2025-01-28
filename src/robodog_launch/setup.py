@@ -13,9 +13,9 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ## Include all launch files.
-        (os.path.join('share', package_name, 'robodog_launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
-
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launcher.[pxy][yma]*')))
     ],
+    
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='roberto',

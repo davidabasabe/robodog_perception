@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/test_service__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/test_service__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/test_service__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/test_service__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__TEST_SERVICE_HPP_

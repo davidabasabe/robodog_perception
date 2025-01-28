@@ -7,5 +7,6 @@
 #include "srv_interfaces/srv/detail/add_two_ints__struct.hpp"
 #include "srv_interfaces/srv/detail/add_two_ints__builder.hpp"
 #include "srv_interfaces/srv/detail/add_two_ints__traits.hpp"
+#include "srv_interfaces/srv/detail/add_two_ints__type_support.hpp"
 
 #endif  // SRV_INTERFACES__SRV__ADD_TWO_INTS_HPP_

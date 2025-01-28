@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/msg/detail/capability_io_bridge_data__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_io_bridge_data__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_io_bridge_data__traits.hpp"
+#include "ros_bt_py_interfaces/msg/detail/capability_io_bridge_data__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__CAPABILITY_IO_BRIDGE_DATA_HPP_

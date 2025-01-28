@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/request_capability_execution__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/request_capability_execution__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/request_capability_execution__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/request_capability_execution__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__REQUEST_CAPABILITY_EXECUTION_HPP_

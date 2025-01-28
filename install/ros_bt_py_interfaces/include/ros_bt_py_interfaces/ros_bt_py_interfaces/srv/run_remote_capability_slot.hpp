@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/run_remote_capability_slot__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/run_remote_capability_slot__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/run_remote_capability_slot__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/run_remote_capability_slot__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__RUN_REMOTE_CAPABILITY_SLOT_HPP_

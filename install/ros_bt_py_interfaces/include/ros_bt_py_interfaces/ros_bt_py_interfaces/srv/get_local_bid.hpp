@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/get_local_bid__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_local_bid__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_local_bid__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/get_local_bid__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_LOCAL_BID_HPP_

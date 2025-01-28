@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/srv/detail/get_folder_structure__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_folder_structure__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_folder_structure__traits.hpp"
+#include "ros_bt_py_interfaces/srv/detail/get_folder_structure__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_FOLDER_STRUCTURE_HPP_

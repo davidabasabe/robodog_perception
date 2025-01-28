@@ -7,5 +7,6 @@
 #include "robot_interfaces/msg/detail/robot__struct.hpp"
 #include "robot_interfaces/msg/detail/robot__builder.hpp"
 #include "robot_interfaces/msg/detail/robot__traits.hpp"
+#include "robot_interfaces/msg/detail/robot__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__MSG__ROBOT_HPP_

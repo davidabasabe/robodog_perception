@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/msg/detail/remote_slot_state__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/remote_slot_state__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/remote_slot_state__traits.hpp"
+#include "ros_bt_py_interfaces/msg/detail/remote_slot_state__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__REMOTE_SLOT_STATE_HPP_

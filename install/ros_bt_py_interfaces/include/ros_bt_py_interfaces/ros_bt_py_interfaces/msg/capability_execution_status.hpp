@@ -7,5 +7,6 @@
 #include "ros_bt_py_interfaces/msg/detail/capability_execution_status__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_execution_status__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/capability_execution_status__traits.hpp"
+#include "ros_bt_py_interfaces/msg/detail/capability_execution_status__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__CAPABILITY_EXECUTION_STATUS_HPP_
