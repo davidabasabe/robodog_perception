@@ -46,7 +46,7 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
-        if not self.depth_array: return
+        if self.depth_array is None: return
         labels = [e["label"] for e in boxes]
         if "path" in labels:
             path = boxes[labels.index("path")]
