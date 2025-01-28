@@ -133,6 +133,7 @@ def generate_launch_description():
         package="ros_bt_py",
         executable="tree_node",
         namespace=robot_namespace_value,
+        remappings=[('/Perception', '/launch_perception_srv/Perception')],
         parameters=[
             {"node_modules": node_modules_value},
             {"tree_storage_paths": tree_storage_paths_value},

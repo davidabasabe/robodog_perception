@@ -1,221 +1,652 @@
-name: workspace_bt.yaml
+name: ''
 path: ''
 root_name: root
 nodes:
-- module: ros_bt_py.nodes.sequence
-  node_class: MemorySequence
-  version: 0.1.0
-  max_children: -1
-  name: root
-  child_names:
-  - Service
-  - choose the right sequence
-  - TopicPublisher_5
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.ros_nodes.service
-  node_class: Service
-  version: ''
-  max_children: 0
-  name: Service
-  child_names: []
-  options:
-  - key: service_name
-    serialized_value: '"Perception"'
-    serialized_type: '{"py/type": "builtins.str"}'
-  - key: service_type
-    serialized_value: '{"py/type": "robot_interfaces.srv._perception.Perception"}'
-    serialized_type: '{"py/type": "builtins.type"}'
-  - key: wait_for_service_seconds
-    serialized_value: '1.2'
-    serialized_type: '{"py/type": "builtins.float"}'
-  - key: wait_for_response_seconds
-    serialized_value: '1.2'
-    serialized_type: '{"py/type": "builtins.float"}'
-  - key: fail_if_not_available
-    serialized_value: 'true'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  inputs: []
-  outputs:
-  - key: robot
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "robot_interfaces.msg._robot.Robot"}'
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.fallback
-  node_class: MemoryFallback
-  version: 0.1.0
-  max_children: -1
-  name: choose the right sequence
-  child_names:
-  - Lava
-  - Arrows
-  - Stairs
-  - Move Forward
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.sequence
-  node_class: MemorySequence
-  version: 0.1.0
-  max_children: -1
-  name: Lava
-  child_names:
-  - get lava status
-  - lava detected?
-  - Constant
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.getters
-  node_class: GetAttr
-  version: 0.1.0
-  max_children: 1
-  name: get lava status
-  child_names: []
-  options:
-  - key: attr_type
-    serialized_value: '{"py/type": "builtins.bool"}'
-    serialized_type: '{"py/type": "builtins.type"}'
-  - key: attr_name
-    serialized_value: '"lava.detected"'
-    serialized_type: '{"py/type": "builtins.str"}'
-  - key: succeed_on_stale_data
-    serialized_value: 'true'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  inputs:
-  - key: object
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "builtins.object"}'
-  outputs:
-  - key: attr
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.compare
-  node_class: CompareConstant
-  version: 0.1.0
-  max_children: 0
-  name: lava detected?
-  child_names: []
-  options:
-  - key: compare_type
-    serialized_value: '{"py/type": "builtins.bool"}'
-    serialized_type: '{"py/type": "builtins.type"}'
-  - key: expected
-    serialized_value: 'true'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  inputs:
-  - key: in
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.constant
-  node_class: Constant
-  version: 0.1.0
-  max_children: 0
-  name: Constant
-  child_names: []
-  options:
-  - key: constant_type
-    serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
-    serialized_type: '{"py/type": "builtins.type"}'
-  - key: constant_value
-    serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "Lava"}'
-    serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
-  inputs: []
-  outputs:
-  - key: constant
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.sequence
-  node_class: MemorySequence
-  version: 0.1.0
-  max_children: -1
-  name: Arrows
-  child_names: []
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.sequence
-  node_class: MemorySequence
-  version: 0.1.0
-  max_children: -1
-  name: Stairs
-  child_names: []
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.nodes.sequence
-  node_class: MemorySequence
-  version: 0.1.0
-  max_children: -1
-  name: Move Forward
-  child_names: []
-  options: []
-  inputs: []
-  outputs: []
-  state: SHUTDOWN
-- module: ros_bt_py.ros_nodes.topic
-  node_class: TopicPublisher
-  version: 1.0.0
-  max_children: 0
-  name: TopicPublisher_5
-  child_names: []
-  options:
-  - key: topic_type
-    serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
-    serialized_type: '{"py/type": "builtins.type"}'
-  - key: topic_name
-    serialized_value: '"/BT/state"'
-    serialized_type: '{"py/type": "builtins.str"}'
-  - key: reliable
-    serialized_value: 'true'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  - key: transient_local
-    serialized_value: 'true'
-    serialized_type: '{"py/type": "builtins.bool"}'
-  - key: depth
-    serialized_value: '0'
-    serialized_type: '{"py/type": "builtins.int"}'
-  inputs:
-  - key: message
-    serialized_value: 'null'
-    serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
-  outputs: []
-  state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: root
+    child_names:
+      - Service
+      - choose the right sequence
+      - akshion_publysher
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.ros_nodes.service
+    node_class: Service
+    version: ''
+    max_children: 0
+    name: Service
+    child_names: []
+    options:
+      - key: service_name
+        serialized_value: '"Perception"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: service_type
+        serialized_value: '{"py/type": "robot_interfaces.srv._perception.Perception"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: wait_for_service_seconds
+        serialized_value: '1.2'
+        serialized_type: '{"py/type": "builtins.float"}'
+      - key: wait_for_response_seconds
+        serialized_value: '1.2'
+        serialized_type: '{"py/type": "builtins.float"}'
+      - key: fail_if_not_available
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs: []
+    outputs:
+      - key: robot
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "robot_interfaces.msg._robot.Robot"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.fallback
+    node_class: MemoryFallback
+    version: 0.1.0
+    max_children: -1
+    name: choose the right sequence
+    child_names:
+      - Lava
+      - Arrows_left
+      - Arrow_right
+      - ich bin ein star, hol mich hier raus
+      - Move Forward
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: Lava
+    child_names:
+      - get lava status
+      - is the floor lava?
+      - Constant
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: get lava status
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"lava.detected"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: is the floor lava?
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: Constant
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "lava"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: Arrows_left
+    child_names:
+      - giv me arrow habibi
+      - Arrow no?
+      - what be name
+      - is be left?
+      - konstantin
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: giv me arrow habibi
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.detected"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: Arrow no?
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: what be name
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.class_name"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: is be left?
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_left"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: konstantin
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_left"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: Arrow_right
+    child_names:
+      - arrow again?!
+      - do it be arrow tho
+      - gimme money RIGHT now
+      - are we doing it RIGHT?!
+      - eh.
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: arrow again?!
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.detected"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: do it be arrow tho
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: gimme money RIGHT now
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.class_name"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: are we doing it RIGHT?!
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_right"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: eh.
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_right"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: ich bin ein star, hol mich hier raus
+    child_names:
+      - gif me
+      - do it be stair?
+      - brainrot
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: gif me
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"stair.detected"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: do it be stair?
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: brainrot
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "stair"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: Move Forward
+    child_names:
+      - move bi*** get out the way
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: move bi*** get out the way
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "move"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.ros_nodes.topic
+    node_class: TopicPublisher
+    version: 1.0.0
+    max_children: 0
+    name: akshion_publysher
+    child_names: []
+    options:
+      - key: topic_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: topic_name
+        serialized_value: '"/BT/state"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: reliable
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+      - key: transient_local
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+      - key: depth
+        serialized_value: '0'
+        serialized_type: '{"py/type": "builtins.int"}'
+    inputs:
+      - key: message
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    outputs: []
+    state: SHUTDOWN
 data_wirings:
-- source:
-    node_name: get lava status
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: get lava status
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: giv me arrow habibi
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: giv me arrow habibi
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: Arrow no?
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: gif me
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: gif me
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: do it be stair?
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: arrow again?!
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: arrow again?!
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: do it be arrow tho
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: what be name
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: what be name
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: is be left?
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: gimme money RIGHT now
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: get lava status
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: is the floor lava?
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: konstantin
+      data_kind: outputs
+      data_key: constant
+    target:
+      node_name: akshion_publysher
+      data_kind: inputs
+      data_key: message
+  - source:
+      node_name: eh.
+      data_kind: outputs
+      data_key: constant
+    target:
+      node_name: akshion_publysher
+      data_kind: inputs
+      data_key: message
+  - source:
+      node_name: Constant
+      data_kind: outputs
+      data_key: constant
+    target:
+      node_name: akshion_publysher
+      data_kind: inputs
+      data_key: message
+  - source:
+      node_name: brainrot
+      data_kind: outputs
+      data_key: constant
+    target:
+      node_name: akshion_publysher
+      data_kind: inputs
+      data_key: message
+  - source:
+      node_name: move bi*** get out the way
+      data_kind: outputs
+      data_key: constant
+    target:
+      node_name: akshion_publysher
+      data_kind: inputs
+      data_key: message
+tick_frequency_hz: 10
+state: EDITABLE
+public_node_data:
+  - node_name: gimme money RIGHT now
     data_kind: outputs
     data_key: attr
-  target:
-    node_name: lava detected?
+  - node_name: are we doing it RIGHT?!
     data_kind: inputs
     data_key: in
-- source:
-    node_name: Service
-    data_kind: outputs
-    data_key: robot
-  target:
-    node_name: get lava status
-    data_kind: inputs
-    data_key: object
-- source:
-    node_name: Constant
-    data_kind: outputs
-    data_key: constant
-  target:
-    node_name: TopicPublisher_5
-    data_kind: inputs
-    data_key: message
-tick_frequency_hz: 10.0
-state: IDLE
-public_node_data: []
