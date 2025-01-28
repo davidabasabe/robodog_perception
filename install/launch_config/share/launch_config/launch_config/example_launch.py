@@ -15,4 +15,10 @@ def generate_launch_description():
             executable='img_sub',
             name='img_sub_node'
         ),
+        Node(
+            package='ros2_ros_bt_py',
+            namespace='launch_behaviour_tree',
+            executable='tree_node',
+            name='behavua_tree_node'
+        ),
     ])
