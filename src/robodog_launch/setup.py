@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 import os 
 from glob import glob
 
-package_name = 'launch_config'
+package_name = 'robodog_launch'
 
 setup(
     name=package_name,
@@ -13,7 +13,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ## Include all launch files.
-        (os.path.join('share', package_name, 'launch_config'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
+        (os.path.join('share', package_name, 'robodog_launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
 
     ],
     install_requires=['setuptools'],
