@@ -60,6 +60,7 @@ class ImageProcessor(Node):
         lava_msg.class_name = "lava"
         if "path" in classes:
             box = boxes[classes.index("path")]
+            print(box)
             coords, dist = get_coords(box)
             lava_msg.x, lava_msg.y, lava_msg.z = coords
             lava_msg.distance = dist
