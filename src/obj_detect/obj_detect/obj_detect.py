@@ -5,7 +5,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from ultralytics import YOLO
 import pyrealsense2 as rs
-from robot_interfaces.msg import Intrinsics
+from robot_interfaces.msg import Intrinsics, YoloDetection
 
 
 class ImageProcessor(Node):
@@ -14,7 +14,7 @@ class ImageProcessor(Node):
         self.subscriber_ = self.create_subscription(Image, '/rs/Image/Color', self.listener_callback, 10)
         self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
         self.subscriber_rs_intrinsics = self.create_subscription(Intrinsics, '/rs/Intrinsics', self.rs_intrinsics_callback, 1)
-        self.publisher_ = self.create_publisher(Image, '/TeamB/rs/Image/Prediction', 10)
+        self.lava_pub = self.create_publisher(YoloDetection, '/lava_detection', 10)
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
         self.depth_intrinsics = rs.pyrealsense2.intrinsics()
@@ -30,10 +30,10 @@ class ImageProcessor(Node):
         }
 
     def listener_callback(self, msg):
+        if self.depth_array is None: return
+
         image = self.cvbridge.imgmsg_to_cv2(img_msg=msg, desired_encoding="bgr8")
         result = self.yolo_model.predict(image, verbose=False)[0].cpu()
-
-        self.publisher_.publish(self.cvbridge.cv2_to_imgmsg(result.plot()))
 
         def get_midpoint(coord_list):
             x = (coord_list[0] + coord_list[2])/2
@@ -46,7 +46,20 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
-        if self.depth_array is None: return
+        #for box in boxes:
+        #    if box["label"] != "path": return
+        #    img_x, img_y = box["coord"]
+        #    distance = self.depth_array[img_y, img_x]*self.depth_scale
+        #    coords = self.pixel_to_point(int(img_x), int(img_y))
+        #    lava_msg = YoloDetection()
+        #    lava_msg.x, 
+
+
+
+
+        #return
+        # Testing with paths class only
+
         labels = [e["label"] for e in boxes]
         if "path" in labels:
             path = boxes[labels.index("path")]
