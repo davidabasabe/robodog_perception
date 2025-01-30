@@ -201,7 +201,7 @@ nodes:
     child_names: []
     options:
       - key: attr_type
-        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '{"py/type": "builtins.str"}'
         serialized_type: '{"py/type": "builtins.type"}'
       - key: attr_name
         serialized_value: '"arrow.class_name"'
@@ -216,7 +216,7 @@ nodes:
     outputs:
       - key: attr
         serialized_value: 'null'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.str"}'
     state: SHUTDOWN
   - module: ros_bt_py.nodes.compare
     node_class: CompareConstant
@@ -226,15 +226,15 @@ nodes:
     child_names: []
     options:
       - key: compare_type
-        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '{"py/type": "builtins.str"}'
         serialized_type: '{"py/type": "builtins.type"}'
       - key: expected
-        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_left"}'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '"arrow_left"'
+        serialized_type: '{"py/type": "builtins.str"}'
     inputs:
       - key: in
         serialized_value: 'null'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.str"}'
     outputs: []
     state: SHUTDOWN
   - module: ros_bt_py.nodes.constant
@@ -323,7 +323,7 @@ nodes:
     child_names: []
     options:
       - key: attr_type
-        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '{"py/type": "builtins.str"}'
         serialized_type: '{"py/type": "builtins.type"}'
       - key: attr_name
         serialized_value: '"arrow.class_name"'
@@ -338,7 +338,7 @@ nodes:
     outputs:
       - key: attr
         serialized_value: 'null'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.str"}'
     state: SHUTDOWN
   - module: ros_bt_py.nodes.compare
     node_class: CompareConstant
@@ -348,15 +348,15 @@ nodes:
     child_names: []
     options:
       - key: compare_type
-        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '{"py/type": "builtins.str"}'
         serialized_type: '{"py/type": "builtins.type"}'
       - key: expected
-        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "arrow_right"}'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_value: '"arrow_right"'
+        serialized_type: '{"py/type": "builtins.str"}'
     inputs:
       - key: in
         serialized_value: 'null'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.str"}'
     outputs: []
     state: SHUTDOWN
   - module: ros_bt_py.nodes.constant
@@ -570,30 +570,6 @@ data_wirings:
       data_kind: inputs
       data_key: in
   - source:
-      node_name: Service
-      data_kind: outputs
-      data_key: robot
-    target:
-      node_name: what be name
-      data_kind: inputs
-      data_key: object
-  - source:
-      node_name: what be name
-      data_kind: outputs
-      data_key: attr
-    target:
-      node_name: is be left?
-      data_kind: inputs
-      data_key: in
-  - source:
-      node_name: Service
-      data_kind: outputs
-      data_key: robot
-    target:
-      node_name: gimme money RIGHT now
-      data_kind: inputs
-      data_key: object
-  - source:
       node_name: get lava status
       data_kind: outputs
       data_key: attr
@@ -641,12 +617,38 @@ data_wirings:
       node_name: akshion_publysher
       data_kind: inputs
       data_key: message
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: what be name
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: gimme money RIGHT now
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: what be name
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: is be left?
+      data_kind: inputs
+      data_key: in
+  - source:
+      node_name: gimme money RIGHT now
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: are we doing it RIGHT?!
+      data_kind: inputs
+      data_key: in
 tick_frequency_hz: 10
 state: EDITABLE
-public_node_data:
-  - node_name: gimme money RIGHT now
-    data_kind: outputs
-    data_key: attr
-  - node_name: are we doing it RIGHT?!
-    data_kind: inputs
-    data_key: in
+public_node_data: []

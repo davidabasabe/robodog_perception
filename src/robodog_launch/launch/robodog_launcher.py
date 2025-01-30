@@ -8,11 +8,12 @@ from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
 
 
 def generate_launch_description():
-    bt_launch_file = os.path.join(
-        FindPackageShare('ros2_ros_bt_py').find('ros_bt_py'),
-        'launch',
-        'ros_bt_py.launch.py'
-    )
+    #bt_launch_file = os.path.join(
+    #    FindPackageShare('robodog_launch'),
+    #    'launch',
+    #    'robodog_ros_bt_py.launch.py'
+    #)
+    bt_launch_file = "src/robodog_launch/launch/robodog_ros_bt_py.launch.py"
     return LaunchDescription([
         Node(
             package='step_detection',
@@ -20,18 +21,12 @@ def generate_launch_description():
             executable='step_detection',
             name='stepdet_node'
         ),
-        #Node(
-        #    package='image_processor',
-        #    namespace='launch_lava',
-        #    executable='img_sub',
-        #    name='img_sub_node'
-        #),
-        #Node(
-        #    package='ros_bt_py',
-        #    namespace='launch_behaviour_tree',
-        #    executable='tree_node',
-        #    name='behavua_tree_node'
-        #),
+        Node(
+            package='obj_detect',
+            namespace='launch_obj_detect',
+            executable='obj_detect',
+            name='obj_detect_node'
+        ),
         Node(
             package='wall_detection',
             namespace='launch_wall',
