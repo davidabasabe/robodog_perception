@@ -15,8 +15,8 @@ class ImageProcessor(Node):
         self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
         self.subscriber_rs_intrinsics = self.create_subscription(Intrinsics, '/rs/Intrinsics', self.rs_intrinsics_callback, 1)
         self.lava_pub = self.create_publisher(YoloDetection, '/lava_detection', 10)
-        self.arrow_left_pub = self.create_publisher(YoloDetection, '/arrow_left', 10)
-        self.arrow_right_pub = self.create_publisher(YoloDetection, '/arrow_right', 10)
+        #self.arrow_left_pub = self.create_publisher(YoloDetection, '/arrow_left', 10)
+        self.arrow_pub = self.create_publisher(YoloDetection, '/arrow_detection', 10)
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
         self.depth_intrinsics = rs.pyrealsense2.intrinsics()
@@ -68,31 +68,50 @@ class ImageProcessor(Node):
         else:
             lava_msg.detected = False
 
-        al_msg = YoloDetection()
-        al_msg.class_name = "arrow_left"
-        if "arrow_left" in classes:
-            box = boxes[classes.index("arrow_left")]
-            coords, dist = get_coords(box)
-            al_msg.x, al_msg.y, al_msg.z = coords
-            al_msg.distance = dist
-            al_msg.detected = True
-        else:
-            al_msg.detected = False
+        #al_msg = YoloDetection()
+        #al_msg.class_name = "arrow_left"
+        #if "arrow_left" in classes:
+        #    box = boxes[classes.index("arrow_left")]
+        #    coords, dist = get_coords(box)
+        #    al_msg.x, al_msg.y, al_msg.z = coords
+        #    al_msg.distance = dist
+        #    al_msg.detected = True
+        #else:
+        #    al_msg.detected = False
+#
+        #ar_msg = YoloDetection()
+        #ar_msg.class_name = "arrow_right"
+        #if "arrow_right" in classes:
+        #    box = boxes[classes.index("arrow_right")]
+        #    coords, dist = get_coords(box)
+        #    ar_msg.x, ar_msg.y, ar_msg.z = coords
+        #    ar_msg.distance = dist
+        #    ar_msg.detected = True
+        #else:
+        #    ar_msg.detected = False
 
-        ar_msg = YoloDetection()
-        ar_msg.class_name = "arrow_right"
-        if "arrow_right" in classes:
-            box = boxes[classes.index("arrow_right")]
-            coords, dist = get_coords(box)
-            ar_msg.x, ar_msg.y, ar_msg.z = coords
-            ar_msg.distance = dist
-            ar_msg.detected = True
-        else:
-            ar_msg.detected = False
+        # Publishing only one result for arrow recognition, to comply with course message and structure forma
+        # To return to previous setting, comment function below with arr_msg and uncomment functions above, also adapt properties in init function
+
+        arr_msg = YoloDetection()
+        arr_msg.class_name = 'no_arrow'
+        arr_msg.detected = False
+        arr_box = None
+        if "arrow_left" in classes:
+            arr_box = boxes[classes.index("arrow_left")]
+            arr_msg.class_name = 'arrow_left'
+        elif "arrow_right" in classes:
+            arr_box = boxes[classes.index("arrow_right")]
+            arr_msg.class_name = 'arrow_right'
+        if arr_box:
+            arr_msg.detected = True
+            coords, dist = get_coords(arr_box)
+            arr_msg.x, arr_msg.y, arr_msg.z = coords
+            arr_msg.distance = dist
 
         self.lava_pub.publish(lava_msg)
-        self.arrow_left_pub.publish(al_msg)
-        self.arrow_right_pub.publish(ar_msg)
+        #self.arrow_left_pub.publish(al_msg)
+        self.arrow_pub.publish(arr_msg)
 
         return      # Testing with paths class only
 
