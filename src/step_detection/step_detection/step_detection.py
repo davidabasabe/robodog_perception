@@ -7,6 +7,7 @@ import sensor_msgs_py.point_cloud2 as pc2
 from sensor_msgs.msg import PointCloud2
 from collections import defaultdict
 from numpy.lib import recfunctions as rfn
+from robot_interfaces.msg import Stair
 
 import matplotlib.pyplot as plt
 import random
@@ -17,9 +18,11 @@ class StepDetection(Node):
     def __init__(self):
         super().__init__('step_detection')
         self.subscriber_ = self.create_subscription(PointCloud2, '/go2/Lidar', self.listener_callback, 10)
+        self.publisher_ = self.create_publisher(Stair, '/stair_detection', 10)
         self.current_lidar_points = []
         self.moving_average_height_diff = deque()
         self.moving_average_ground_height = deque()
+        self.stair_msg = Stair()
 
     def listener_callback(self, msg):
         pcd = self.msg_to_pcd(msg)
@@ -100,7 +103,7 @@ class StepDetection(Node):
                 largest_cluster_indices = np.where(labels == largest_cluster_label)[0]
                 inlier_cloud = inlier_cloud.select_by_index(largest_cluster_indices)
                 plane_z_points.append(np.mean(np.asarray(inlier_cloud.points)[:, 2]))
-                plane_x_points.append(np.mean(np.asarray(inlier_cloud.points)[:, 0]))
+                plane_x_points.append(np.min(np.asarray(inlier_cloud.points)[:, 0]))
                 
             elif np.abs(normal_vector[2]) < 0.03:
                 inlier_cloud = point_cloud.select_by_index(inliers)
@@ -122,29 +125,35 @@ class StepDetection(Node):
             # Remove inliers from the point cloud
             copy_point_cloud = copy_point_cloud.select_by_index(inliers, invert=True)
 
-
-        #if len(plane_x_points) < 1: 
         height_diff = 0
-        #else:
+
         if len(vertical_z_points) > 0:
             closest_cloud_index = np.argmin(vertical_x_points)
             plane_height = vertical_z_points[closest_cloud_index]
             height_diff = plane_height + 0.4
+            closest_x_distance = vertical_x_points[closest_cloud_index]
         elif len(plane_x_points) > 0:
             closest_cloud_index = np.argmin(plane_x_points)
             plane_height = plane_z_points[closest_cloud_index]
             height_diff = plane_height + 0.4
+            closest_x_distance = plane_x_points[closest_cloud_index]
+        else:
+            closest_x_distance = 0
         smoothened_height_diff = (sum(self.moving_average_height_diff) + height_diff) / (len(self.moving_average_height_diff) + 1)
         self.add_height_to_storage(smoothened_height_diff, self.moving_average_height_diff)
+        self.stair_msg.distance = float(closest_x_distance)
+        self.stair_msg.detected = False
+        self.stair_msg.upstairs = False
         if 0.2 > smoothened_height_diff > 0.02:
-            print("step up!")
-            pass
+            #self.get_logger().info("step up!")
+            self.stair_msg.upstairs = True
+            self.stair_msg.detected = True
         elif -1 < smoothened_height_diff < -0.01:
-            print("step down!")
-            pass
-        else:
-            print("no step!")
-            pass
+            #self.get_logger().info("step down!")
+            self.stair_msg.detected = True
+        
+        self.publisher_.publish(self.stair_msg)
+        
 
     def add_height_to_storage(self, height_diff: float, storage: deque) -> list[float]:
         storage.append(height_diff)

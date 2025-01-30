@@ -22,7 +22,6 @@ setup(
         'console_scripts': [
             'publisher = pub_sub.publisher:main',
             'subscriber = pub_sub.subscriber:main'
-
         ],
     },
 )
