@@ -7,6 +7,5 @@
 #include "robot_interfaces/msg/detail/wall__struct.hpp"
 #include "robot_interfaces/msg/detail/wall__builder.hpp"
 #include "robot_interfaces/msg/detail/wall__traits.hpp"
-#include "robot_interfaces/msg/detail/wall__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__MSG__WALL_HPP_

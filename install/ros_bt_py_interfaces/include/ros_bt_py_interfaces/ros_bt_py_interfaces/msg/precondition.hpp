@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/msg/detail/precondition__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/precondition__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/precondition__traits.hpp"
-#include "ros_bt_py_interfaces/msg/detail/precondition__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__PRECONDITION_HPP_

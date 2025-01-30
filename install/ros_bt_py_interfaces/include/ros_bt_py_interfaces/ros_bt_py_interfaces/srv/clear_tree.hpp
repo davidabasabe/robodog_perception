@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/clear_tree__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/clear_tree__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/clear_tree__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/clear_tree__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__CLEAR_TREE_HPP_

@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/msg/detail/ping_msg__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/ping_msg__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/ping_msg__traits.hpp"
-#include "ros_bt_py_interfaces/msg/detail/ping_msg__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__PING_MSG_HPP_

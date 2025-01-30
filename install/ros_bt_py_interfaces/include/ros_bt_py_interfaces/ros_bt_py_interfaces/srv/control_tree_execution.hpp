@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/control_tree_execution__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/control_tree_execution__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/control_tree_execution__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/control_tree_execution__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__CONTROL_TREE_EXECUTION_HPP_

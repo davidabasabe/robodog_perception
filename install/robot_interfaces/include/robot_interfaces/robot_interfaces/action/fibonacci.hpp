@@ -7,6 +7,5 @@
 #include "robot_interfaces/action/detail/fibonacci__struct.hpp"
 #include "robot_interfaces/action/detail/fibonacci__builder.hpp"
 #include "robot_interfaces/action/detail/fibonacci__traits.hpp"
-#include "robot_interfaces/action/detail/fibonacci__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__ACTION__FIBONACCI_HPP_

@@ -7,6 +7,5 @@
 #include "robot_interfaces/msg/detail/stair__struct.hpp"
 #include "robot_interfaces/msg/detail/stair__builder.hpp"
 #include "robot_interfaces/msg/detail/stair__traits.hpp"
-#include "robot_interfaces/msg/detail/stair__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__MSG__STAIR_HPP_

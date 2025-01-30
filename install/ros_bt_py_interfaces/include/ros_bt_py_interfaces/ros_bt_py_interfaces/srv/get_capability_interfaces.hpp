@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/get_capability_interfaces__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_capability_interfaces__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_capability_interfaces__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/get_capability_interfaces__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_CAPABILITY_INTERFACES_HPP_

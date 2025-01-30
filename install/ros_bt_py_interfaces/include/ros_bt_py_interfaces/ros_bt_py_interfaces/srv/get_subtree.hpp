@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/get_subtree__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_subtree__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_subtree__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/get_subtree__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_SUBTREE_HPP_

@@ -7,6 +7,5 @@
 #include "robot_interfaces/srv/detail/perception__struct.hpp"
 #include "robot_interfaces/srv/detail/perception__builder.hpp"
 #include "robot_interfaces/srv/detail/perception__traits.hpp"
-#include "robot_interfaces/srv/detail/perception__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__SRV__PERCEPTION_HPP_

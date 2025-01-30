@@ -7,6 +7,5 @@
 #include "robot_interfaces/action/detail/commands__struct.hpp"
 #include "robot_interfaces/action/detail/commands__builder.hpp"
 #include "robot_interfaces/action/detail/commands__traits.hpp"
-#include "robot_interfaces/action/detail/commands__type_support.hpp"
 
 #endif  // ROBOT_INTERFACES__ACTION__COMMANDS_HPP_

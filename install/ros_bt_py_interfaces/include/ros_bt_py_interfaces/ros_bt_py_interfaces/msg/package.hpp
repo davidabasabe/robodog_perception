@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/msg/detail/package__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/package__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/package__traits.hpp"
-#include "ros_bt_py_interfaces/msg/detail/package__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__PACKAGE_HPP_

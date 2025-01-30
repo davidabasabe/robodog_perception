@@ -33,6 +33,12 @@ def generate_launch_description():
         #    name='behavua_tree_node'
         #),
         Node(
+            package='wall_detection',
+            namespace='launch_wall',
+            executable='wall_detection',
+            name='wall_detection_node'
+        ),
+        Node(
             package='perception',
             namespace='launch_perception_srv',
             executable='perception',

@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/set_simulate_tick__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/set_simulate_tick__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/set_simulate_tick__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/set_simulate_tick__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__SET_SIMULATE_TICK_HPP_

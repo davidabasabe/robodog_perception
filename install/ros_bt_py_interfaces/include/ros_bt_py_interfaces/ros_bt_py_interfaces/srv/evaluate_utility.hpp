@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/evaluate_utility__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/evaluate_utility__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/evaluate_utility__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/evaluate_utility__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__EVALUATE_UTILITY_HPP_

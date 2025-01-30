@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/delete_capability_implementation__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/delete_capability_implementation__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/delete_capability_implementation__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/delete_capability_implementation__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__DELETE_CAPABILITY_IMPLEMENTATION_HPP_

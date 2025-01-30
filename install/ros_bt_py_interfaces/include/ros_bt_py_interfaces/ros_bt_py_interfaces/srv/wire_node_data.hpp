@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/wire_node_data__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/wire_node_data__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/wire_node_data__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/wire_node_data__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__WIRE_NODE_DATA_HPP_

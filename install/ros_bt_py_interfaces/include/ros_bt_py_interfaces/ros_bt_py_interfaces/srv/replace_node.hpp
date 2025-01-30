@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/replace_node__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/replace_node__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/replace_node__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/replace_node__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__REPLACE_NODE_HPP_

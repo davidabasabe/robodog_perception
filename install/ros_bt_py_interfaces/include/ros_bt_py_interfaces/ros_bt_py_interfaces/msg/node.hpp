@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/msg/detail/node__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/node__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/node__traits.hpp"
-#include "ros_bt_py_interfaces/msg/detail/node__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__NODE_HPP_

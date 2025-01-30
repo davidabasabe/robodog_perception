@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/get_available_subtrees__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_available_subtrees__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/get_available_subtrees__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/get_available_subtrees__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__GET_AVAILABLE_SUBTREES_HPP_

@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/action/detail/find_best_executor__struct.hpp"
 #include "ros_bt_py_interfaces/action/detail/find_best_executor__builder.hpp"
 #include "ros_bt_py_interfaces/action/detail/find_best_executor__traits.hpp"
-#include "ros_bt_py_interfaces/action/detail/find_best_executor__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__ACTION__FIND_BEST_EXECUTOR_HPP_

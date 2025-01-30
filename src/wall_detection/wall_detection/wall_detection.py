@@ -22,11 +22,6 @@ class LidarSubscriber(Node):
             self.lidar_callback,
             1
         )
-        self.publisher_wall_data = self.create_publisher(
-            Float32MultiArray,
-            "/wall_numbers",
-            1
-        )
 
         self.wall_msg_publisher = self.create_publisher(
             Wall,
@@ -114,34 +109,31 @@ class LidarSubscriber(Node):
 
             wall_detection_msg.angle_left = angle_left
             wall_detection_msg.angle_right = angle_right
-            angle = np.mean([angle_left, angle_right])
+            #angle = np.mean([angle_left, angle_right])
 
-            plt.clf()
-            plt.plot(left_wall[:, 1], intercept_l + slope_left*left_wall[:, 1], 'r-', label="RANSAC regressor left",)
-            plt.plot(right_wall[:, 1], intercept_r + slope_right*right_wall[:, 1], 'g-', label="RANSAC regressor right",)
-            if wall_distance_f:
-                plt.plot(front_wall[:, 1], intercept_f + slope_front*front_wall[:, 1], 'b-', label="RANSAC regressor front",)
-            plt.plot(wall_points[:, 1], wall_points[:, 0], 'b.', label="Point cloud")
-
-            plt.title('Fitted Lines')
-            plt.axvline(0, color='g', label='Middle')
-            plt.ylim([-2.0, 5.0])
-            plt.xlim([-2.0, 2.0])
-            plt.gca().invert_xaxis()
-            # plt.axis('equal')
-            plt.legend(loc='lower right')
-            plt.pause(0.01)
+            #For real time view of ransac algorithm, uncomment!
+            #plt.clf()
+            #plt.plot(left_wall[:, 1], intercept_l + slope_left*left_wall[:, 1], 'r-', label="RANSAC regressor left",)
+            #plt.plot(right_wall[:, 1], intercept_r + slope_right*right_wall[:, 1], 'g-', label="RANSAC regressor right",)
+            #if wall_distance_f:
+            #    plt.plot(front_wall[:, 1], intercept_f + slope_front*front_wall[:, 1], 'b-', label="RANSAC regressor front",)
+            #plt.plot(wall_points[:, 1], wall_points[:, 0], 'b.', label="Point cloud")
+#
+            #plt.title('Fitted Lines')
+            #plt.axvline(0, color='g', label='Middle')
+            #plt.ylim([-2.0, 5.0])
+            #plt.xlim([-2.0, 2.0])
+            #plt.gca().invert_xaxis()
+            ## plt.axis('equal')
+            #plt.legend(loc='lower right')
+            #plt.pause(0.01)
 
             wall_distance_l = - (intercept_l / slope_left)
             wall_detection_msg.distance_left = wall_distance_l.item()
             wall_distance_r = - (intercept_r / slope_right)
             wall_detection_msg.distance_right = wall_distance_r.item()
-            wall_distance = abs(wall_distance_l) - abs(wall_distance_r)
+            #wall_distance = abs(wall_distance_l) - abs(wall_distance_r)
 
-            print(f"angle: {angle} [rad], wall_distance: {wall_distance.item()} [m]")
-
-            self.wall_data_msg.data = [angle.item(), wall_distance.item()]
-            self.publisher_wall_data.publish(self.wall_data_msg)
             self.wall_msg_publisher.publish(wall_detection_msg)
         
         else:

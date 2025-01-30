@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/srv/detail/set_options__struct.hpp"
 #include "ros_bt_py_interfaces/srv/detail/set_options__builder.hpp"
 #include "ros_bt_py_interfaces/srv/detail/set_options__traits.hpp"
-#include "ros_bt_py_interfaces/srv/detail/set_options__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__SRV__SET_OPTIONS_HPP_

@@ -7,6 +7,5 @@
 #include "ros_bt_py_interfaces/msg/detail/tree_data_update__struct.hpp"
 #include "ros_bt_py_interfaces/msg/detail/tree_data_update__builder.hpp"
 #include "ros_bt_py_interfaces/msg/detail/tree_data_update__traits.hpp"
-#include "ros_bt_py_interfaces/msg/detail/tree_data_update__type_support.hpp"
 
 #endif  // ROS_BT_PY_INTERFACES__MSG__TREE_DATA_UPDATE_HPP_
