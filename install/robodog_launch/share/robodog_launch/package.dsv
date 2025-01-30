@@ -1,6 +1,0 @@
-source;share/robodog_launch/hook/pythonpath.ps1
-source;share/robodog_launch/hook/pythonpath.dsv
-source;share/robodog_launch/hook/pythonpath.sh
-source;share/robodog_launch/hook/ament_prefix_path.ps1
-source;share/robodog_launch/hook/ament_prefix_path.dsv
-source;share/robodog_launch/hook/ament_prefix_path.sh

@@ -1,9 +1,0 @@
-# Request
-string sequence
-Robot robot
----
-# Result
-bool finished
----
-# Feedback
-string status

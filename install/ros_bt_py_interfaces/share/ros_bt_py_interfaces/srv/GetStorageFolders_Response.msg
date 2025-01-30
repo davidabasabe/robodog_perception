@@ -1,2 +1,0 @@
-
-string[] storage_folders

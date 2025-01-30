@@ -1,2 +1,0 @@
-
-int64 available_remote_capability_slots

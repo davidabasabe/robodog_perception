@@ -1,5 +1,0 @@
-float64 distance_left
-float64 distance_right
-float64 distance_front
-float64 angle_left
-float64 angle_right

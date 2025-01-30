@@ -1,6 +1,0 @@
-
-bool success
-string error_message
-bool execute_local
-string implementation_name
-string remote_mission_controller_topic
