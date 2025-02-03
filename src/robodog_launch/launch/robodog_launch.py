@@ -43,4 +43,11 @@ def generate_launch_description():
             bt_launch_file,  # Path to the bt tree launch file
             launch_arguments={"enable_web_interface": "True"}.items(),  # Enabling web interface to see tree behavior
         ),
+        Node(
+            package='control',
+            # namespace='launch_perception_srv',
+            executable='api_call_debug',
+            name='control_node',
+            output='screen',
+        ),
     ])
