@@ -45,7 +45,7 @@ class PerceptionNode(Node):
 
     def timer_callback(self):
         self.publisher_robot.publish(self.robot_msg)
-        self.get_logger().info(f"{self.robot_msg}")   
+        #self.get_logger().info(f"{self.robot_msg}")   
 
     def serviceCallback(self, req, res):
         res.robot.lava = self.robot_msg.lava
