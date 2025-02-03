@@ -15,7 +15,6 @@ class ImageProcessor(Node):
         self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
         self.subscriber_rs_intrinsics = self.create_subscription(Intrinsics, '/rs/Intrinsics', self.rs_intrinsics_callback, 1)
         self.lava_pub = self.create_publisher(YoloDetection, '/lava_detection', 10)
-        #self.arrow_left_pub = self.create_publisher(YoloDetection, '/arrow_left', 10)
         self.arrow_pub = self.create_publisher(YoloDetection, '/arrow_detection', 10)
         self.yolo_model = YOLO("src/obj_detect/weights/best.pt")
         self.cvbridge = CvBridge()
@@ -48,6 +47,8 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
+        boxes = [box for box in boxes if box["conf"] > 0.7]
+
         def get_coords(box):
             img_x, img_y = box["coord"]
             distance = self.depth_array[int(img_y), int(img_x)]*self.depth_scale
@@ -60,38 +61,12 @@ class ImageProcessor(Node):
         lava_msg.class_name = "lava"
         if "path" in classes:
             box = boxes[classes.index("path")]
-            print(box)
             coords, dist = get_coords(box)
             lava_msg.x, lava_msg.y, lava_msg.z = coords
             lava_msg.distance = dist
             lava_msg.detected = True
         else:
             lava_msg.detected = False
-
-        #al_msg = YoloDetection()
-        #al_msg.class_name = "arrow_left"
-        #if "arrow_left" in classes:
-        #    box = boxes[classes.index("arrow_left")]
-        #    coords, dist = get_coords(box)
-        #    al_msg.x, al_msg.y, al_msg.z = coords
-        #    al_msg.distance = dist
-        #    al_msg.detected = True
-        #else:
-        #    al_msg.detected = False
-#
-        #ar_msg = YoloDetection()
-        #ar_msg.class_name = "arrow_right"
-        #if "arrow_right" in classes:
-        #    box = boxes[classes.index("arrow_right")]
-        #    coords, dist = get_coords(box)
-        #    ar_msg.x, ar_msg.y, ar_msg.z = coords
-        #    ar_msg.distance = dist
-        #    ar_msg.detected = True
-        #else:
-        #    ar_msg.detected = False
-
-        # Publishing only one result for arrow recognition, to comply with course message and structure forma
-        # To return to previous setting, comment function below with arr_msg and uncomment functions above, also adapt properties in init function
 
         arr_msg = YoloDetection()
         arr_msg.class_name = 'no_arrow'
@@ -110,18 +85,9 @@ class ImageProcessor(Node):
             arr_msg.distance = dist
 
         self.lava_pub.publish(lava_msg)
-        #self.arrow_left_pub.publish(al_msg)
         self.arrow_pub.publish(arr_msg)
 
-        return      # Testing with paths class only
-
-        labels = [e["label"] for e in boxes]
-        if "path" in labels:
-            path = boxes[labels.index("path")]
-            path_img_x, path_img_y = path["coord"]
-            path_coods = self.pixel_to_point(int(path_img_x), int(path_img_y))
-            print(f"x: {path_img_x:.2f}  y: {path_img_y:.2f}  d: {self.depth_array[int(path_img_y), int(path_img_x)]*self.depth_scale:.2f}  | ", path_coods)
-        
+        return
 
     def depth_callback(self, msg):
         depth_image = self.cvbridge.imgmsg_to_cv2(msg, desired_encoding='16UC1')
