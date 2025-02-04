@@ -108,7 +108,7 @@ class StepDetection(Node):
                 
             elif np.abs(normal_vector[2]) < 0.05:
                 inlier_cloud = point_cloud.select_by_index(inliers)
-                labels = np.array(inlier_cloud.cluster_dbscan(eps=0.1, min_points=10, print_progress=False))
+                labels = np.array(inlier_cloud.cluster_dbscan(eps=0.05, min_points=10, print_progress=False))
                 valid_labels = labels[labels != -1]
 
                 if valid_labels.size < 1:

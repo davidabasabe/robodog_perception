@@ -50,9 +50,9 @@ nodes:
     name: choose the right sequence
     child_names:
       - Lava
+      - ich bin ein star, hol mich hier raus
       - Arrows_left
       - Arrow_right
-      - ich bin ein star, hol mich hier raus
       - Move Forward
     options: []
     inputs: []
@@ -160,6 +160,140 @@ nodes:
     version: 0.1.0
     max_children: 0
     name: Action
+    child_names: []
+    options:
+      - key: action_type
+        serialized_value: '{"py/type": "robot_interfaces.action._commands.Commands"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: action_name
+        serialized_value: '"commands_action_server"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: wait_for_action_server_seconds
+        serialized_value: '1.2'
+        serialized_type: '{"py/type": "builtins.float"}'
+      - key: timeout_seconds
+        serialized_value: '1.2'
+        serialized_type: '{"py/type": "builtins.float"}'
+      - key: fail_if_not_available
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: sequence
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: robot
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "robot_interfaces.msg._robot.Robot"}'
+    outputs:
+      - key: result_finished
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+      - key: feedback_status
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.str"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.sequence
+    node_class: MemorySequence
+    version: 0.1.0
+    max_children: -1
+    name: ich bin ein star, hol mich hier raus
+    child_names:
+      - gif me
+      - do it be stair?
+      - brainrot
+      - k.
+      - ich muss (ohne hier) raus
+    options: []
+    inputs: []
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: gif me
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"stair.detected"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: CompareConstant
+    version: 0.1.0
+    max_children: 0
+    name: do it be stair?
+    child_names: []
+    options:
+      - key: compare_type
+        serialized_value: '{"py/type": "builtins.bool"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: expected
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: in
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: brainrot
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "stair"}'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.constant
+    node_class: Constant
+    version: 0.1.0
+    max_children: 0
+    name: k.
+    child_names: []
+    options:
+      - key: constant_type
+        serialized_value: '{"py/type": "builtins.str"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: constant_value
+        serialized_value: '"Stairs"'
+        serialized_type: '{"py/type": "builtins.str"}'
+    inputs: []
+    outputs:
+      - key: constant
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.str"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.ros_nodes.action
+    node_class: Action
+    version: 0.1.0
+    max_children: 0
+    name: ich muss (ohne hier) raus
     child_names: []
     options:
       - key: action_type
@@ -556,140 +690,6 @@ nodes:
     node_class: MemorySequence
     version: 0.1.0
     max_children: -1
-    name: ich bin ein star, hol mich hier raus
-    child_names:
-      - gif me
-      - do it be stair?
-      - brainrot
-      - k.
-      - ich muss (ohne hier) raus
-    options: []
-    inputs: []
-    outputs: []
-    state: SHUTDOWN
-  - module: ros_bt_py.nodes.getters
-    node_class: GetAttr
-    version: 0.1.0
-    max_children: 1
-    name: gif me
-    child_names: []
-    options:
-      - key: attr_type
-        serialized_value: '{"py/type": "builtins.bool"}'
-        serialized_type: '{"py/type": "builtins.type"}'
-      - key: attr_name
-        serialized_value: '"stair.detected"'
-        serialized_type: '{"py/type": "builtins.str"}'
-      - key: succeed_on_stale_data
-        serialized_value: 'true'
-        serialized_type: '{"py/type": "builtins.bool"}'
-    inputs:
-      - key: object
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.object"}'
-    outputs:
-      - key: attr
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.bool"}'
-    state: SHUTDOWN
-  - module: ros_bt_py.nodes.compare
-    node_class: CompareConstant
-    version: 0.1.0
-    max_children: 0
-    name: do it be stair?
-    child_names: []
-    options:
-      - key: compare_type
-        serialized_value: '{"py/type": "builtins.bool"}'
-        serialized_type: '{"py/type": "builtins.type"}'
-      - key: expected
-        serialized_value: 'true'
-        serialized_type: '{"py/type": "builtins.bool"}'
-    inputs:
-      - key: in
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.bool"}'
-    outputs: []
-    state: SHUTDOWN
-  - module: ros_bt_py.nodes.constant
-    node_class: Constant
-    version: 0.1.0
-    max_children: 0
-    name: brainrot
-    child_names: []
-    options:
-      - key: constant_type
-        serialized_value: '{"py/type": "std_msgs.msg._string.String"}'
-        serialized_type: '{"py/type": "builtins.type"}'
-      - key: constant_value
-        serialized_value: '{"py/object": "std_msgs.msg._string.String", "_data": "stair"}'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
-    inputs: []
-    outputs:
-      - key: constant
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "std_msgs.msg._string.String"}'
-    state: SHUTDOWN
-  - module: ros_bt_py.nodes.constant
-    node_class: Constant
-    version: 0.1.0
-    max_children: 0
-    name: k.
-    child_names: []
-    options:
-      - key: constant_type
-        serialized_value: '{"py/type": "builtins.str"}'
-        serialized_type: '{"py/type": "builtins.type"}'
-      - key: constant_value
-        serialized_value: '"Stairs"'
-        serialized_type: '{"py/type": "builtins.str"}'
-    inputs: []
-    outputs:
-      - key: constant
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.str"}'
-    state: SHUTDOWN
-  - module: ros_bt_py.ros_nodes.action
-    node_class: Action
-    version: 0.1.0
-    max_children: 0
-    name: ich muss (ohne hier) raus
-    child_names: []
-    options:
-      - key: action_type
-        serialized_value: '{"py/type": "robot_interfaces.action._commands.Commands"}'
-        serialized_type: '{"py/type": "builtins.type"}'
-      - key: action_name
-        serialized_value: '"commands_action_server"'
-        serialized_type: '{"py/type": "builtins.str"}'
-      - key: wait_for_action_server_seconds
-        serialized_value: '1.2'
-        serialized_type: '{"py/type": "builtins.float"}'
-      - key: timeout_seconds
-        serialized_value: '1.2'
-        serialized_type: '{"py/type": "builtins.float"}'
-      - key: fail_if_not_available
-        serialized_value: 'true'
-        serialized_type: '{"py/type": "builtins.bool"}'
-    inputs:
-      - key: sequence
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.str"}'
-      - key: robot
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "robot_interfaces.msg._robot.Robot"}'
-    outputs:
-      - key: result_finished
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.bool"}'
-      - key: feedback_status
-        serialized_value: 'null'
-        serialized_type: '{"py/type": "builtins.str"}'
-    state: SHUTDOWN
-  - module: ros_bt_py.nodes.sequence
-    node_class: MemorySequence
-    version: 0.1.0
-    max_children: -1
     name: Move Forward
     child_names:
       - move bi*** get out the way
@@ -1028,6 +1028,12 @@ public_node_data:
   - node_name: Action
     data_kind: outputs
     data_key: feedback_status
+  - node_name: ich muss (ohne hier) raus
+    data_kind: outputs
+    data_key: result_finished
+  - node_name: ich muss (ohne hier) raus
+    data_kind: outputs
+    data_key: feedback_status
   - node_name: bre
     data_kind: outputs
     data_key: result_finished
@@ -1038,12 +1044,6 @@ public_node_data:
     data_kind: outputs
     data_key: result_finished
   - node_name: I hab strr :)
-    data_kind: outputs
-    data_key: feedback_status
-  - node_name: ich muss (ohne hier) raus
-    data_kind: outputs
-    data_key: result_finished
-  - node_name: ich muss (ohne hier) raus
     data_kind: outputs
     data_key: feedback_status
   - node_name: shocked pikachu fase
