@@ -53,7 +53,7 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
-        boxes = [box for box in boxes if box["conf"] > 0.7]
+        boxes = [box for box in boxes if box["conf"] > 0.4]
 
         def get_coords(box):
             img_x, img_y = box["coord"]
