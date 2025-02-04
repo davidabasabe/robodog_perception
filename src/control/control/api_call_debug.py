@@ -97,19 +97,19 @@ class CommandPublisher(Node):
         self._move_y(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Move x"
         self._move_x(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Jump"
         self._jump(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Finished"
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
@@ -132,19 +132,19 @@ class CommandPublisher(Node):
         self._approach_arrow(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Turn left/right"
         self._turn(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Move forward"
         self._move_forward(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Finished"
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
@@ -167,19 +167,19 @@ class CommandPublisher(Node):
         self._switch_climb_mode(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Move forward"
         self._move_forward(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Switch gait to normal again"
         self._switch_normal_gait(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Finished"
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
@@ -203,12 +203,12 @@ class CommandPublisher(Node):
         wall_distance = self._get_distance(goal_handle)
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Move forward"
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))
         goal_handle.publish_feedback(feedback_msg)
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
         feedback_msg.status = "Finished"
         self.get_logger().info('Feedback: {0}'.format(feedback_msg.status))

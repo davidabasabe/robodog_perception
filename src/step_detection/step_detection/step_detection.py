@@ -38,8 +38,8 @@ class StepDetection(Node):
             self.current_lidar_points.pop(0)
 
         compound_points = np.vstack(self.current_lidar_points)
-        #compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, -0.15))
-        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, 3.0))
+        #compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.4, 0.4), z_range=(-3.0, -0.15))
+        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.5, 0.5), z_range=(-1.0, -0.15))
         compound_cloud = o3d.geometry.PointCloud()
         compound_cloud.points = o3d.utility.Vector3dVector(compound_points)
 
@@ -90,7 +90,7 @@ class StepDetection(Node):
             normal_vector = plane_model[:3]
 
             # Check if the plane is horizontal (normal vector close to Z-axis)
-            if np.abs(normal_vector[2]) > 0.97:
+            if np.abs(normal_vector[2]) > 0.90:
                 inlier_cloud = point_cloud.select_by_index(inliers)
                 labels = np.array(inlier_cloud.cluster_dbscan(eps=0.02, min_points=2, print_progress=False))
                 valid_labels = labels[labels != -1]
@@ -106,9 +106,9 @@ class StepDetection(Node):
                 plane_z_points.append(np.mean(np.asarray(inlier_cloud.points)[:, 2]))
                 plane_x_points.append(np.min(np.asarray(inlier_cloud.points)[:, 0]))
                 
-            elif np.abs(normal_vector[2]) < 0.03:
+            elif np.abs(normal_vector[2]) < 0.05:
                 inlier_cloud = point_cloud.select_by_index(inliers)
-                labels = np.array(inlier_cloud.cluster_dbscan(eps=0.05, min_points=2, print_progress=False))
+                labels = np.array(inlier_cloud.cluster_dbscan(eps=0.1, min_points=10, print_progress=False))
                 valid_labels = labels[labels != -1]
 
                 if valid_labels.size < 1:
@@ -145,7 +145,7 @@ class StepDetection(Node):
         self.stair_msg.distance = float(closest_x_distance)
         self.stair_msg.detected = False
         self.stair_msg.upstairs = False
-        if 0.15 > smoothened_height_diff > 0.1:
+        if 0.15 > smoothened_height_diff > 0.05:
         #if 0.15 > smoothened_height_diff > 0.05:
             #self.get_logger().info("step up!")
             self.stair_msg.upstairs = True

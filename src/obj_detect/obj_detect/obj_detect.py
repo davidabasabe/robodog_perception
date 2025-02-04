@@ -53,7 +53,7 @@ class ImageProcessor(Node):
             "coord": get_midpoint(box.xyxy.tolist()[0])
         } for box in result.boxes]
 
-        boxes = [box for box in boxes if box["conf"] > 0.4]
+        #boxes = [box for box in boxes if box["conf"] > 0.4]
 
         def get_coords(box):
             img_x, img_y = box["coord"]
@@ -69,6 +69,8 @@ class ImageProcessor(Node):
             box = boxes[classes.index("path")]
             coords, dist = get_coords(box)
             lava_msg.x, lava_msg.y, lava_msg.z = coords
+            if type(dist) is not np.float64:
+                dist = 10.0
             lava_msg.distance = dist
             lava_msg.detected = True
         else:
