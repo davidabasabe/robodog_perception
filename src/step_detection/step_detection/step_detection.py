@@ -85,9 +85,9 @@ class StepDetection(Node):
                 num_iterations=num_iterations
             )
             if len(inliers) < min_points_for_plane:
-                break
-            
+                break         
             normal_vector = plane_model[:3]
+
             # Check if the plane is horizontal (normal vector close to Z-axis)
             if np.abs(normal_vector[2]) > 0.97:
                 inlier_cloud = point_cloud.select_by_index(inliers)

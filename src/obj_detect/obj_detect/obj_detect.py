@@ -6,12 +6,18 @@ from sensor_msgs.msg import Image
 from ultralytics import YOLO
 import pyrealsense2 as rs
 from robot_interfaces.msg import Intrinsics, YoloDetection
+from matplotlib import pyplot as plt
 
 
 class ImageProcessor(Node):
     def __init__(self):
         super().__init__('image_processor')
         self.subscriber_ = self.create_subscription(Image, '/rs/Image/Color', self.listener_callback, 10)
+
+        # test
+        #self.subscriber_two = self.create_subscription(Image, '/go2/Image', self.listener_callback_two, 10)
+        #
+
         self.depth_subscriber = self.create_subscription(Image, '/rs/Image/Depth', self.depth_callback, 10)
         self.subscriber_rs_intrinsics = self.create_subscription(Intrinsics, '/rs/Intrinsics', self.rs_intrinsics_callback, 1)
         self.lava_pub = self.create_publisher(YoloDetection, '/lava_detection', 10)
