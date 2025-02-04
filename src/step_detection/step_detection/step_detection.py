@@ -38,7 +38,8 @@ class StepDetection(Node):
             self.current_lidar_points.pop(0)
 
         compound_points = np.vstack(self.current_lidar_points)
-        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.5, 0.5), z_range=(-3.0, -0.15))
+        #compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, -0.15))
+        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, 3.0))
         compound_cloud = o3d.geometry.PointCloud()
         compound_cloud.points = o3d.utility.Vector3dVector(compound_points)
 
@@ -144,7 +145,8 @@ class StepDetection(Node):
         self.stair_msg.distance = float(closest_x_distance)
         self.stair_msg.detected = False
         self.stair_msg.upstairs = False
-        if 0.15 > smoothened_height_diff > 0.05:
+        if 0.15 > smoothened_height_diff > 0.1:
+        #if 0.15 > smoothened_height_diff > 0.05:
             #self.get_logger().info("step up!")
             self.stair_msg.upstairs = True
             self.stair_msg.detected = True
