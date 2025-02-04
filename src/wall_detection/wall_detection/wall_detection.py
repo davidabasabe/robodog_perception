@@ -79,7 +79,9 @@ class LidarSubscriber(Node):
             slope_front = self.ransac_regressor_front.estimator_.coef_
             intercept_f = self.ransac_regressor_front.estimator_.intercept_
             wall_distance_f = -(intercept_f / slope_front)
-            wall_detection_msg.distance_front = np.mean(front_wall[:, 0]).item()
+            distance_front = np.mean(front_wall[:, 0]).item()
+            if distance_front == 0.0: distance_front = 10.0
+            wall_detection_msg.distance_front = distance_front
         
         if len(left_wall) > 1 and len(right_wall) > 1:
 
