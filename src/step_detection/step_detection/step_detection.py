@@ -38,7 +38,8 @@ class StepDetection(Node):
             self.current_lidar_points.pop(0)
 
         compound_points = np.vstack(self.current_lidar_points)
-        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, -0.15))
+        #compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, -0.15))
+        compound_points = self.crop_point_cloud(compound_points, x_range=(0.4, 1.5), y_range=(-0.3, 0.3), z_range=(-3.0, 3.0))
         compound_cloud = o3d.geometry.PointCloud()
         compound_cloud.points = o3d.utility.Vector3dVector(compound_points)
 
