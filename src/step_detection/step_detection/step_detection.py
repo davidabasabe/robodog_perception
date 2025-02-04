@@ -144,7 +144,8 @@ class StepDetection(Node):
         self.stair_msg.distance = float(closest_x_distance)
         self.stair_msg.detected = False
         self.stair_msg.upstairs = False
-        if 0.15 > smoothened_height_diff > 0.05:
+        if 0.15 > smoothened_height_diff > 0.1:
+        #if 0.15 > smoothened_height_diff > 0.05:
             #self.get_logger().info("step up!")
             self.stair_msg.upstairs = True
             self.stair_msg.detected = True
