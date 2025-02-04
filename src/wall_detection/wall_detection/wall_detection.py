@@ -97,11 +97,11 @@ class LidarSubscriber(Node):
             
             def solve_wall_angle(slope):
                 angle = np.arctan2(slope, 1)
-                angle = angle.item() * (180 / math.pi)
-                angle_sign = get_sign(angle)
-                angle = angle - (angle_sign * 90)
-                if abs(angle) < 5 or abs(angle) > 45:
-                    angle = float(0)
+                angle = angle.item() #* (180 / math.pi)
+                #angle_sign = get_sign(angle)
+                #angle = angle - (angle_sign * 90)
+                #if abs(angle) < 5 or abs(angle) > 45:
+                #    angle = float(0)
                 return angle
 
             angle_left = solve_wall_angle(slope_left)
