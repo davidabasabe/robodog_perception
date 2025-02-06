@@ -111,16 +111,13 @@ class StepDetection(Node):
         self.stair_msg.detected = False
         self.stair_msg.upstairs = False
         if not height_diff:
-            self.get_logger().info("no step!")
+            self.publisher_.publish(self.stair_msg)
+            return
         elif 0.25 > height_diff > 0.1:
-            self.get_logger().info("step up!")
             self.stair_msg.upstairs = True
             self.stair_msg.detected = True
         elif -0.25 < height_diff < -0.04:
-            self.get_logger().info("step down!")
             self.stair_msg.detected = True
-        else:
-            self.get_logger().info("no step!")
         
         self.publisher_.publish(self.stair_msg)
     

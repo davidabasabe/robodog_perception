@@ -89,6 +89,8 @@ class ImageProcessor(Node):
         if arr_box:
             arr_msg.detected = True
             coords, dist = get_coords(arr_box)
+            if type(dist) is not np.float64:
+                dist = 10.0
             arr_msg.x, arr_msg.y, arr_msg.z = coords
             arr_msg.distance = dist
 

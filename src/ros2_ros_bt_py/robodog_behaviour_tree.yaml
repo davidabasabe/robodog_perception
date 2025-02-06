@@ -336,6 +336,8 @@ nodes:
       - Arrow no?
       - what be name
       - is be left?
+      - gib dist
+      - we close?
       - konstantin
       - heh
       - bre
@@ -431,6 +433,47 @@ nodes:
         serialized_type: '{"py/type": "builtins.str"}'
     outputs: []
     state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: gib dist
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.float"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.x"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.float"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: LessThanConstant
+    version: 0.1.0
+    max_children: 0
+    name: we close?
+    child_names: []
+    options:
+      - key: target
+        serialized_value: '0.5'
+        serialized_type: '{"py/type": "builtins.float"}'
+    inputs:
+      - key: a
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.float"}'
+    outputs: []
+    state: SHUTDOWN
   - module: ros_bt_py.nodes.constant
     node_class: Constant
     version: 0.1.0
@@ -516,6 +559,8 @@ nodes:
       - do it be arrow tho
       - gimme money RIGHT now
       - are we doing it RIGHT?!
+      - how far?!
+      - we dere yet?
       - eh.
       - giv me strrr
       - I hab strr :)
@@ -609,6 +654,47 @@ nodes:
       - key: in
         serialized_value: 'null'
         serialized_type: '{"py/type": "builtins.str"}'
+    outputs: []
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.getters
+    node_class: GetAttr
+    version: 0.1.0
+    max_children: 1
+    name: how far?!
+    child_names: []
+    options:
+      - key: attr_type
+        serialized_value: '{"py/type": "builtins.float"}'
+        serialized_type: '{"py/type": "builtins.type"}'
+      - key: attr_name
+        serialized_value: '"arrow.x"'
+        serialized_type: '{"py/type": "builtins.str"}'
+      - key: succeed_on_stale_data
+        serialized_value: 'true'
+        serialized_type: '{"py/type": "builtins.bool"}'
+    inputs:
+      - key: object
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.object"}'
+    outputs:
+      - key: attr
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.float"}'
+    state: SHUTDOWN
+  - module: ros_bt_py.nodes.compare
+    node_class: LessThanConstant
+    version: 0.1.0
+    max_children: 0
+    name: we dere yet?
+    child_names: []
+    options:
+      - key: target
+        serialized_value: '0.5'
+        serialized_type: '{"py/type": "builtins.float"}'
+    inputs:
+      - key: a
+        serialized_value: 'null'
+        serialized_type: '{"py/type": "builtins.float"}'
     outputs: []
     state: SHUTDOWN
   - module: ros_bt_py.nodes.constant
@@ -1019,6 +1105,38 @@ data_wirings:
       node_name: shocked pikachu fase
       data_kind: inputs
       data_key: robot
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: gib dist
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: Service
+      data_kind: outputs
+      data_key: robot
+    target:
+      node_name: how far?!
+      data_kind: inputs
+      data_key: object
+  - source:
+      node_name: gib dist
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: we close?
+      data_kind: inputs
+      data_key: a
+  - source:
+      node_name: how far?!
+      data_kind: outputs
+      data_key: attr
+    target:
+      node_name: we dere yet?
+      data_kind: inputs
+      data_key: a
 tick_frequency_hz: 10
 state: EDITABLE
 public_node_data:
