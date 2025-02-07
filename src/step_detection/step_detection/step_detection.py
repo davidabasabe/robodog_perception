@@ -121,34 +121,31 @@ class StepDetection(Node):
         
         self.publisher_.publish(self.stair_msg)
     
-    def convert_open3d_to_ros(self, open3d_cloud, frame_id: str = "map", rgb: int = 255):
-        """Convert an Open3D PointCloud to a ROS2 PointCloud2 message."""
-        
-        points = np.asarray(open3d_cloud.points, dtype=np.float32)
-        rgba = np.zeros((points.shape[0],), dtype=np.float32)
-        rgba[:] = rgb
-
-        cloud_data = np.column_stack((points, rgba))
-
-        msg = PointCloud2()
-        msg.header = Header()
-        msg.header.frame_id = frame_id
-        msg.height = 1  # Unordered cloud (1D list of points)
-        msg.width = points.shape[0]
-        msg.is_dense = False
-        msg.is_bigendian = False
-        msg.point_step = 16  # Each point has (x,y,z,rgba), 4 * 4 bytes each
-        msg.row_step = msg.point_step * msg.width
-
-        msg.fields = [
-            PointField(name="x", offset=0, datatype=PointField.FLOAT32, count=1),
-            PointField(name="y", offset=4, datatype=PointField.FLOAT32, count=1),
-            PointField(name="z", offset=8, datatype=PointField.FLOAT32, count=1),
-            PointField(name="rgba", offset=12, datatype=PointField.FLOAT32, count=1),
-        ]
-        msg.data = cloud_data.tobytes()
-        
-        return msg
+def convert_open3d_to_ros(self, open3d_cloud, frame_id: str = "map", rgb: int = 255):
+    """Convert an Open3D PointCloud to a ROS2 PointCloud2 message."""
+    
+    points = np.asarray(open3d_cloud.points, dtype=np.float32)
+    rgba = np.zeros((points.shape[0],), dtype=np.float32)
+    rgba[:] = rgb
+    cloud_data = np.column_stack((points, rgba))
+    msg = PointCloud2()
+    msg.header = Header()
+    msg.header.frame_id = frame_id
+    msg.height = 1  # Unordered cloud (1D list of points)
+    msg.width = points.shape[0]
+    msg.is_dense = False
+    msg.is_bigendian = False
+    msg.point_step = 16  # Each point has (x,y,z,rgba), 4 * 4 bytes each
+    msg.row_step = msg.point_step * msg.width
+    msg.fields = [
+        PointField(name="x", offset=0, datatype=PointField.FLOAT32, count=1),
+        PointField(name="y", offset=4, datatype=PointField.FLOAT32, count=1),
+        PointField(name="z", offset=8, datatype=PointField.FLOAT32, count=1),
+        PointField(name="rgba", offset=12, datatype=PointField.FLOAT32, count=1),
+    ]
+    msg.data = cloud_data.tobytes()
+    
+    return msg
             
 def main(args=None):
     rclpy.init(args=args)

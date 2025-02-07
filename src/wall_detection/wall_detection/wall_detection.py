@@ -5,6 +5,7 @@ from std_msgs.msg import Float32MultiArray
 from sensor_msgs.msg import PointCloud2
 import sensor_msgs_py.point_cloud2 as pc2
 from robot_interfaces.msg import Wall
+import open3d as o3d
 
 import numpy as np
 from numpy.lib import recfunctions as rfn
@@ -40,20 +41,37 @@ class LidarSubscriber(Node):
         # convert point cloud message to numpy array
         point_cloud = pc2.read_points(msg)
         point_cloud = rfn.structured_to_unstructured(point_cloud[['x', 'y', 'z']])
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(point_cloud)
 
-        # filter the point cloud for the left and right wall points
+        # Erase ground cloud to observe rest of scene with more accuracy
+        distance_threshold = 0.05
+        ransac_n = 5
+        num_iterations = 200
+        plane_model, inliers = pcd.segment_plane(
+                distance_threshold=distance_threshold,
+                ransac_n=ransac_n,
+                num_iterations=num_iterations
+            )
+        
+        ground_plane = pcd.select_by_index(inliers)
+        new_ground_height = np.mean(np.asarray(ground_plane.points)[:, 2])
+        obstacle_cloud = pcd.select_by_index(inliers, invert=True)
+        point_cloud = np.asarray(obstacle_cloud.points)
+
+        # Filter the point cloud for the left and right wall points
         wall_points = point_cloud.copy()
-        # TODO: filter the point cloud in x and z direction
-        upper_threshold_z_axis = 0.3 # TODO
-        lower_threshold_z_axis = -0.1 # TODO
-        threshold_x_axis = 2 # TODO
+        # Filter the point cloud in x and z direction
+        upper_threshold_z_axis = 0.5 # TODO
+        lower_threshold_z_axis = new_ground_height + 0.05 
+        threshold_x_axis = 1.5 # TODO
         wall_points = wall_points[wall_points[:, 2] > lower_threshold_z_axis] # Z-axis
         wall_points = wall_points[wall_points[:, 2] < upper_threshold_z_axis] # Z-axis
         wall_points = wall_points[wall_points[:, 0] < threshold_x_axis] # X-axis
         wall_points = wall_points[wall_points[:, 0] > -threshold_x_axis] # X-axis
 
         left_wall = wall_points.copy()
-        # TODO: filter the point cloud in y direction
+        # Filter the point cloud in y direction
         lower_threshold_y_axis = 0.5 # TODO
         upper_threshold_y_axis = 1
         left_wall = left_wall[(left_wall[:, 1] > lower_threshold_y_axis)] # Y-axis
@@ -64,7 +82,7 @@ class LidarSubscriber(Node):
 
         front_wall = wall_points.copy()
         front_x_threshold = 0
-        front_y_threshold = 0.3
+        front_y_threshold = 0.4
         front_z_threshold = 0
         front_wall =  front_wall[front_wall[:, 0] > front_x_threshold] # X-axis
         front_wall =  front_wall[front_wall[:, 1] > -front_y_threshold] # Y-axis
@@ -79,7 +97,7 @@ class LidarSubscriber(Node):
             slope_front = self.ransac_regressor_front.estimator_.coef_
             intercept_f = self.ransac_regressor_front.estimator_.intercept_
             wall_distance_f = -(intercept_f / slope_front)
-            distance_front = np.mean(front_wall[:, 0]).item()
+            distance_front = np.min(front_wall[:, 0]).item()
             if distance_front == 0.0: distance_front = 10.0
             wall_detection_msg.distance_front = distance_front
         
@@ -99,8 +117,8 @@ class LidarSubscriber(Node):
             
             def solve_wall_angle(slope):
                 angle = np.arctan2(slope, 1)
-                angle = angle.item() #* (180 / math.pi)
-                #angle_sign = get_sign(angle)
+                angle = angle.item() #* (180 / math.pi) # Commented code that would transform to degrees
+                #angle_sign = get_sign(angle)           # and center results around 0 for easier control algorithm
                 #angle = angle - (angle_sign * 90)
                 #if abs(angle) < 5 or abs(angle) > 45:
                 #    angle = float(0)
@@ -111,9 +129,10 @@ class LidarSubscriber(Node):
 
             wall_detection_msg.angle_left = angle_left
             wall_detection_msg.angle_right = angle_right
+
             #angle = np.mean([angle_left, angle_right])
 
-            #For real time view of ransac algorithm, uncomment!
+            # For real time view of ransac algorithm, uncomment!
             #plt.clf()
             #plt.plot(left_wall[:, 1], intercept_l + slope_left*left_wall[:, 1], 'r-', label="RANSAC regressor left",)
             #plt.plot(right_wall[:, 1], intercept_r + slope_right*right_wall[:, 1], 'g-', label="RANSAC regressor right",)
@@ -129,18 +148,16 @@ class LidarSubscriber(Node):
             ## plt.axis('equal')
             #plt.legend(loc='lower right')
             #plt.pause(0.01)
-
+#
             wall_distance_l = - (intercept_l / slope_left)
             wall_detection_msg.distance_left = wall_distance_l.item()
             wall_distance_r = - (intercept_r / slope_right)
             wall_detection_msg.distance_right = wall_distance_r.item()
+
             #wall_distance = abs(wall_distance_l) - abs(wall_distance_r)
 
-            self.wall_msg_publisher.publish(wall_detection_msg)
-        
-        else:
-            
-            print(f"Not enough points to interpolate!")
+        self.wall_msg_publisher.publish(wall_detection_msg)
+
 
     def convert_pointcloud2_to_numpy(self, cloud_msg):
 

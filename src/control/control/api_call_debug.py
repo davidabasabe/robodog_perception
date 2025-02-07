@@ -26,7 +26,6 @@ from robot_interfaces.action import Commands
 class CommandPublisher(Node):
     def __init__(self):
         super().__init__('command_publisher')
-   
         self.action_server = ActionServer(
             self,
             Commands,
@@ -234,4 +233,4 @@ def main(args=None):
     rclpy.shutdown()
 
 if __name__ == '__main__':
-   main()
+    main()
