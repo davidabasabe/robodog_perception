@@ -99,12 +99,12 @@ class StepDetection(Node):
     
     def resolve_closest_x_point(self, height_diff: float, obstacle_z_points, obstacle_x_points) -> float:
         if obstacle_z_points.size <= 0 or obstacle_x_points.size <= 0:
-            self.get_logger().info("No Step!") 
+            #self.get_logger().info("No Step!") 
             return 10.0
         if 0.25 > height_diff > 0.1:
             threshold = np.max(obstacle_z_points) - 0.05
             hor_plane = obstacle_x_points[obstacle_z_points >= threshold]
-            self.get_logger().info("Step Up")
+            #self.get_logger().info("Step Up")
         elif -0.25 < height_diff < -0.04:
             threshold = np.max(obstacle_z_points) + 0.05
             hor_plane = obstacle_x_points[obstacle_z_points <= threshold]
