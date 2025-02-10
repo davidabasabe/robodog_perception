@@ -133,21 +133,21 @@ class LidarSubscriber(Node):
             #angle = np.mean([angle_left, angle_right])
 
             # For real time view of ransac algorithm, uncomment!
-            #plt.clf()
-            #plt.plot(left_wall[:, 1], intercept_l + slope_left*left_wall[:, 1], 'r-', label="RANSAC regressor left",)
-            #plt.plot(right_wall[:, 1], intercept_r + slope_right*right_wall[:, 1], 'g-', label="RANSAC regressor right",)
-            #if wall_distance_f:
-            #    plt.plot(front_wall[:, 1], intercept_f + slope_front*front_wall[:, 1], 'b-', label="RANSAC regressor front",)
-            #plt.plot(wall_points[:, 1], wall_points[:, 0], 'b.', label="Point cloud")
-#
-            #plt.title('Fitted Lines')
-            #plt.axvline(0, color='g', label='Middle')
-            #plt.ylim([-2.0, 5.0])
-            #plt.xlim([-2.0, 2.0])
-            #plt.gca().invert_xaxis()
-            ## plt.axis('equal')
-            #plt.legend(loc='lower right')
-            #plt.pause(0.01)
+            plt.clf()
+            plt.plot(left_wall[:, 1], intercept_l + slope_left*left_wall[:, 1], 'r-', label="RANSAC regressor left",)
+            plt.plot(right_wall[:, 1], intercept_r + slope_right*right_wall[:, 1], 'g-', label="RANSAC regressor right",)
+            if wall_distance_f:
+                plt.plot(front_wall[:, 1], intercept_f + slope_front*front_wall[:, 1], 'b-', label="RANSAC regressor front",)
+            plt.plot(wall_points[:, 1], wall_points[:, 0], 'b.', label="Point cloud")
+
+            plt.title('Fitted Lines')
+            plt.axvline(0, color='g', label='Middle')
+            plt.ylim([-2.0, 5.0])
+            plt.xlim([-2.0, 2.0])
+            plt.gca().invert_xaxis()
+            # plt.axis('equal')
+            plt.legend(loc='lower right')
+            plt.pause(0.01)
 #
             wall_distance_l = - (intercept_l / slope_left)
             wall_detection_msg.distance_left = wall_distance_l.item()

@@ -1,3 +1,4 @@
+import struct
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2
@@ -20,13 +21,15 @@ class StepDetection(Node):
         super().__init__('step_detection')
         self.subscriber_ = self.create_subscription(PointCloud2, '/go2/Lidar', self.listener_callback, 10)
         self.publisher_ = self.create_publisher(Stair, '/stair_detection', 10)
-        self.publisher_vertical_planes = self.create_publisher(PointCloud2, '/vertical_planes', 10)
-        self.publisher_horizontal_planes = self.create_publisher(PointCloud2, '/horizontal_planes', 10)
+        self.publisher_ground_plane = self.create_publisher(PointCloud2, '/ground_plane', 10)
+        self.publisher_obstacle_planes = self.create_publisher(PointCloud2, '/obstacle_planes', 10)
         self.current_lidar_points = []
         self.moving_average_height_diff = deque()
         self.moving_average_ground_height = deque()
         self.stair_msg = Stair()
         self.ground_height = 0
+        self.red_colour = color_to_float(0, 0, 255)   # Red in BGR
+        self.white_color = color_to_float(0, 255, 0)  # Green in BGR
 
     def msg_to_pcd(self, msg):
         point_cloud = pc2.read_points(msg)
@@ -51,6 +54,7 @@ class StepDetection(Node):
             )
         
         ground_plane = copy_point_cloud.select_by_index(inliers)
+        #self.publisher_ground_plane.publish(convert_open3d_to_ros(ground_plane, 'utlidar_lidar', self.white_color))
         new_ground_height = np.mean(np.asarray(ground_plane.points)[:, 2])
         self.ground_height = new_ground_height
         
@@ -59,6 +63,7 @@ class StepDetection(Node):
         cropped_points = self.crop_point_cloud(cropped_points, x_range=(0.3, 1), y_range=(-0.3, 0.3), z_range=(-1.0, 0.7))
         cropped_cloud = o3d.geometry.PointCloud()
         cropped_cloud.points = o3d.utility.Vector3dVector(cropped_points)
+        #self.publisher_obstacle_planes.publish(convert_open3d_to_ros(cropped_cloud, 'utlidar_lidar', rgb = self.red_colour))
         z_points_obstacles = np.asarray(cropped_cloud.points)[:, 2]
         x_points_obstacles = np.asarray(cropped_cloud.points)[:, 0]
         height_diff = None
@@ -68,8 +73,8 @@ class StepDetection(Node):
             lowest_obstacle_point = np.min(z_points_obstacles)
             height_diff = self.calculate_step_height(highest_obstacle_point, lowest_obstacle_point, new_ground_height)
             closest_x_point = self.resolve_closest_x_point(height_diff, z_points_obstacles, x_points_obstacles)
-            #print(f"Obstacle height difference is: {height_diff}")
-            #print(f"Obstacle distance is: {closest_x_point}")
+            #self.get_logger().info(f"Obstacle height difference is: {height_diff}")
+            #self.get_logger().info(f"Obstacle distance is: {closest_x_point}")
         self.resolve_step(height_diff, closest_x_point)
         return
     
@@ -93,11 +98,13 @@ class StepDetection(Node):
         return point_cloud[mask]
     
     def resolve_closest_x_point(self, height_diff: float, obstacle_z_points, obstacle_x_points) -> float:
-        if obstacle_z_points.size <= 0 or obstacle_x_points.size <= 0: 
+        if obstacle_z_points.size <= 0 or obstacle_x_points.size <= 0:
+            self.get_logger().info("No Step!") 
             return 10.0
         if 0.25 > height_diff > 0.1:
             threshold = np.max(obstacle_z_points) - 0.05
             hor_plane = obstacle_x_points[obstacle_z_points >= threshold]
+            self.get_logger().info("Step Up")
         elif -0.25 < height_diff < -0.04:
             threshold = np.max(obstacle_z_points) + 0.05
             hor_plane = obstacle_x_points[obstacle_z_points <= threshold]
@@ -113,7 +120,7 @@ class StepDetection(Node):
         if not height_diff:
             self.publisher_.publish(self.stair_msg)
             return
-        elif 0.25 > height_diff > 0.1:
+        elif 0.25 > height_diff > 0.15:
             self.stair_msg.upstairs = True
             self.stair_msg.detected = True
         elif -0.25 < height_diff < -0.04:
@@ -121,7 +128,7 @@ class StepDetection(Node):
         
         self.publisher_.publish(self.stair_msg)
     
-def convert_open3d_to_ros(self, open3d_cloud, frame_id: str = "map", rgb: int = 255):
+def convert_open3d_to_ros(open3d_cloud, frame_id: str = "map", rgb: int = 255):
     """Convert an Open3D PointCloud to a ROS2 PointCloud2 message."""
     
     points = np.asarray(open3d_cloud.points, dtype=np.float32)
@@ -146,6 +153,11 @@ def convert_open3d_to_ros(self, open3d_cloud, frame_id: str = "map", rgb: int = 
     msg.data = cloud_data.tobytes()
     
     return msg
+
+def color_to_float(b, g, r, a=255):
+    """Convert BGRA color (0-255) into a packed float format for ROS PointCloud2."""
+    packed = (int(a) << 24) | (int(r) << 16) | (int(g) << 8) | int(b)  # BGRA order
+    return struct.unpack('f', struct.pack('I', packed))[0]
             
 def main(args=None):
     rclpy.init(args=args)
