@@ -83,7 +83,7 @@ class ImageProcessor(Node):
         if "arrow_left" in classes:
             arr_box = boxes[classes.index("arrow_left")]
             arr_msg.class_name = 'arrow_left'
-        if "arrow_right" in classes:
+        if "arrow_right" in classes: # Make elif again if broken
             arr_box = boxes[classes.index("arrow_right")]
             arr_msg.class_name = 'arrow_right'
         if arr_box:
